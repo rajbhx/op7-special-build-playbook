@@ -19,3 +19,4 @@ in the build repo. Synced copies for offline search.
 | 2026-08-13-r5-amoled.md | Session digest — 2026-08-13 — r5 AMOLED true-black dark theme + C5 layer verification |
 | 2026-08-13-r5-media.md | Session digest — 2026-08-13 — r5 (C1): hardware media codec verification |
 | 2026-08-13-r6-settings-black-fix.md | Session digest — 2026-08-13 — r6 settings black-void fix (AMOLED) |
+| 2026-08-13-r6b-playbook-conversation-sync.md | Session digest — 2026-08-13 — r6b: playbook sync gap + conversation knowledge |

@@ -80,7 +80,9 @@
 | D4 | GitHub artifact downloads truncated (4+ aborts) | unreliable network | local python3 -m http.server loopback transfer; 131 MB in ~1.5 s; SHA-256 verify |
 | D5 | /sdcard files from shell unreadable by app proot | FUSE permission model; chmod unsupported | transfer via app-visible storage or MediaStore; verify sizes |
 | D6 | bsh stdout looks odd | returns JSON envelope {result,output}; no readAllBytes() (old Java) | parse JSON; read streams with BufferedReader loops |
-| D7 | warm-start impossible in proot env | HOME no-op; am finish unavailable; BACK intercepted | record as pending; needs adb or HOME-capable session |
+| D7 | warm-start impossible in proot env | HOME no-op; am finish and am task move-task-to-back unknown on this Android build; BACK intercepted | record as pending; needs adb or HOME-capable session |
+| D8 | dumpsys meminfo/gfxinfo returned 'No process found' or empty | app process was force-stopped by the preceding cold-start loop | launch the app and let it render BEFORE capturing mem/gfx (cmd_mem launches; run gfx after mem) |
+| D9 | large dumpsys outputs (>40 KB) only partially pull through Shizuku | wrapper stdout race gets worse with payload size; 400 KB batterystats truncated at 82% after 15 retries | accept partial captures and label them, or use chunked pulls / adb / MediaStore for full captures |
 
 ### E. CI quality
 

@@ -7,6 +7,14 @@ folder under `projects/`. Content is auto-synced from each project's own
 field-notes log and conversation digests — agents do NOT hand-edit generated
 files.
 
+## Skill for agents
+
+This repo ships the `op7-special-build` Codex skill (see `skills/op7-special-build/`).
+Agents with skill support: the skill auto-triggers on device-specific Android build
+work; inside it, the golden rules + phase order + gotchas are loaded, and it points
+back here for search. Local installs live under the Codex skills dir; keep this repo
+copy as the canonical source (it is versioned with the playbook).
+
 ## Search first, read only what you need (low-token pattern)
 
 Do NOT read the whole journey table (`docs/09-*`, `projects/<slug>/README.md`)

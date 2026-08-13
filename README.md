@@ -9,7 +9,8 @@ Docs folder in that repo mirrors the live workflow/scripts/patches.
 
 ## How to use this
 
-0. **Agents**: search first, read only what matches —
+0. **Agents**: if your environment supports skills, load the `op7-special-build`
+   skill (in `skills/op7-special-build/`); otherwise search first, read only what matches —
    `python3 scripts/lookup.py <problem words>` (or grep `notes/*/INDEX.md`).
    Full-detail files: `notes/<slug>/entries/<id>.md`. See `AGENTS.md`.
 1. Read `docs/00-quickstart.md` for the order of operations (baseline before optimization).

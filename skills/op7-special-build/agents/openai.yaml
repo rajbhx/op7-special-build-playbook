@@ -1,0 +1,4 @@
+interface:
+  display_name: "OP7 Special-Build Playbook"
+  short_description: "Field-tested guide for device-specific Android builds"
+  default_prompt: "Use $skill-name to guide building a device-specific Android app distribution, starting with baseline before optimization."

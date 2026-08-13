@@ -1,0 +1,27 @@
+project:
+  slug: deepdenoiser-op7
+  name: "DeepDenoiser OP7"
+  description: "OnePlus 7 edition of the DeepDenoiser audio/video denoiser (Expo/ONNX DeepFilterNet3)"
+  repo: https://github.com/rajbhx/deepdenoiser-op7
+  upstream_repo: https://github.com/sayampy/deepdenoiser
+  engine: native          # Expo/RN native app with ONNX Runtime + Kotlin MediaCodec
+  target_device: "OnePlus 7 (GM1901)"
+  abi: arm64-v8a
+  status: active
+  maintainer: rajbhx
+  field_notes:
+    repo: rajbhx/deepdenoiser-op7
+    path: docs/field-notes/log.yml
+  phases:
+    "0": done
+    "1": done
+    "2": in-progress
+    "3": done
+    "4": done
+    "5": planning
+    "6": pending
+    "7": in-progress
+    "8": pending
+    "9": pending
+    "10": pending
+  patches_ref: patches/op7/

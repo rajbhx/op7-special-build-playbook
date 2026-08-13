@@ -13,7 +13,7 @@ Docs folder in that repo mirrors the live workflow/scripts/patches.
    skill (in `skills/op7-special-build/`); otherwise search first, read only what matches —
    `python3 scripts/lookup.py <problem words>` (or grep `notes/*/INDEX.md`).
    Full-detail files: `notes/<slug>/entries/<id>.md`. See `AGENTS.md`.
-1. Read `docs/00-quickstart.md` for the order of operations (baseline before optimization).
+1. Read `docs/00-master-spec.md` for the full engineering contract (ROLE, all 35 requirements, success criteria, user operating rules); `docs/00-quickstart.md` for the order of operations.
 2. If your build fails to install: `docs/03-apk-not-installed.md`.
 3. If you are stuck reaching the device without USB: `docs/02-device-access-and-transfer.md`.
 4. If you are building on GitHub Actions: `docs/04-build-pipeline-blueprint.md` + `docs/05-github-free-tier-operations.md`.

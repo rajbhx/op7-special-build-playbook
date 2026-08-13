@@ -49,6 +49,7 @@ Auto-maintained knowledge base + workflows for building device-specific Android 
 
 ## References (load on demand)
 
+- `references/master-spec.md` — the full user engineering specification (ROLE, 35 requirements, success criteria) + user operating rules; canonical copy in playbook `docs/00-master-spec.md`
 - `references/pipeline.md` — CI workflows, secrets, caches, validation gates, release flow, versioning
 - `references/device-facts.md` — verified OP7 hardware facts + how to verify on-device (Phase 5)
 - `references/playbook.md` — knowledge loop, lookup usage, adding a new app/project

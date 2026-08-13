@@ -1,8 +1,9 @@
 name: Playbook Sync
 
-# Auto-updates the journey doc from the machine-readable field-notes log in
-# rajbhx/iceraven-op7 (docs/field-notes/log.yml). Weekly + manual + dispatch.
-# No secrets needed: the source repo is public and GITHUB_TOKEN is enough.
+# Auto-updates the playbook from every registered project's field-notes log.
+# Reads projects/*/manifest.yml, fetches each log (public repos, GITHUB_TOKEN
+# is enough), regenerates projects/<slug>/README.md + projects/README.md.
+# Weekly + manual + repository_dispatch (type: field-notes-sync).
 
 on:
   schedule:
@@ -16,36 +17,50 @@ permissions:
 
 jobs:
   sync:
-    name: Regenerate field notes from iceraven-op7 log
+    name: Fetch logs and regenerate project docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch source log (public repo)
+      - name: Fetch field-notes logs for all projects
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api repos/rajbhx/iceraven-op7/contents/docs/field-notes/log.yml \
-            -H "Accept: application/vnd.github.raw" > /tmp/field-notes-log.yml
-          wc -l /tmp/field-notes-log.yml
+          mkdir -p _logs
+          FOUND=0
+          for MANIFEST in projects/*/manifest.yml; do
+            SLUG="$(basename "$(dirname "$MANIFEST")")"
+            [ "$SLUG" = "_template" ] && continue
+            REPO="$(grep -A1 '^  field_notes:' "$MANIFEST" | sed -n 's/^    repo: *//p' | head -1)"
+            PATH_FIELD="$(grep -A2 '^  field_notes:' "$MANIFEST" | sed -n 's/^    path: *//p' | head -1)"
+            if [ -n "$REPO" ] && [ -n "$PATH_FIELD" ]; then
+              if gh api "repos/$REPO/contents/$PATH_FIELD" -H "Accept: application/vnd.github.raw" > "_logs/$SLUG.yml" 2>/dev/null; then
+                echo "fetched $SLUG <- $REPO:$PATH_FIELD ($(wc -l < "_logs/$SLUG.yml") lines)"
+                FOUND=$((FOUND+1))
+              else
+                echo "::warning::could not fetch log for $SLUG ($REPO:$PATH_FIELD)"
+              fi
+            fi
+          done
+          echo "logs fetched: $FOUND"
 
       - name: Install PyYAML
         run: python3 -m pip install --quiet pyyaml
 
-      - name: Generate journey doc
-        run: python3 scripts/generate_field_notes.py /tmp/field-notes-log.yml docs/09-field-notes-journey.md
+      - name: Generate project docs
+        run: python3 scripts/generate_project_docs.py _logs
 
       - name: Commit and push if changed
         run: |
-          if git diff --quiet docs/09-field-notes-journey.md; then
+          if git diff --quiet; then
             echo "no changes; nothing to commit"
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add docs/09-field-notes-journey.md
-            git commit -m "chore(field-notes): auto-sync from iceraven-op7 log"
+            git add projects/
+            git commit -m "chore(playbook): auto-sync project docs from field-notes logs"
             git push
-            echo "pushed updated field notes"
+            echo "pushed updated project docs"
           fi
 
       - name: Write summary
@@ -53,7 +68,7 @@ jobs:
         run: |
           {
             echo "## Playbook sync"
-            echo "- source: \`rajbhx/iceraven-op7\` \`docs/field-notes/log.yml\`"
-            echo "- regenerated: \`docs/09-field-notes-journey.md\`"
-            echo "- schedule: weekly + manual dispatch + \`repository_dispatch\` type \`field-notes-sync\`"
+            echo "- fetched logs for all projects registered in \`projects/*/manifest.yml\`"
+            echo "- regenerated \`projects/<slug>/README.md\` + \`projects/README.md\`"
+            echo "- triggers: weekly + manual + \`repository_dispatch\` type \`field-notes-sync\`"
           } >> "$GITHUB_STEP_SUMMARY"

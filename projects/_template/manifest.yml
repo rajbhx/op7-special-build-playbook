@@ -1,0 +1,37 @@
+# Project manifest — copy this template to projects/<your-slug>/manifest.yml
+# to register a new special build in the playbook. One folder per project.
+# Keep values short; links and logs live in the referenced repo, not here.
+
+project:
+  slug: my-app-op7              # must match the folder name (projects/<slug>/)
+  name: "My App OP7"            # human-readable name
+  description: "One-line description of the special build"
+  repo: https://github.com/you/my-app-op7   # your build repo (public)
+  upstream_repo: https://github.com/owner/upstream-app   # original app source
+  engine: geckoview             # geckoview | webview | native | other
+  target_device: "OnePlus 7 (GM1901)"   # verified device, not assumed
+  abi: arm64-v8a                # ABI(s) shipped
+  status: planning              # planning | active | maintained | paused
+  maintainer: you
+
+  # Where this project's field-notes log lives (source for auto-sync).
+  # Any repo+path reachable by `gh api` on a public repo works.
+  field_notes:
+    repo: you/my-app-op7
+    path: docs/field-notes/log.yml
+
+  # Phase status per docs/00-quickstart.md (0=audit ... 10=long-term maintenance)
+  phases:
+    "0": done
+    "1": done
+    "2": in-progress
+    "3": done
+    "4": done
+    "5": planning
+    "6": pending
+    "7": pending
+    "8": pending
+    "9": pending
+    "10": pending
+
+  patches_ref: patches/op7/     # where custom patches live in the build repo

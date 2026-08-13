@@ -1,0 +1,34 @@
+name: CI
+
+# Fast validation for agents/contributors editing the playbook.
+# No network calls; fails fast on schema errors.
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate playbook repo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint workflow YAML (actionlint)
+        uses: docker://rhysd/actionlint:latest
+        with:
+          args: -color
+
+      - name: Validate project manifests
+        run: |
+          python3 -m pip install --quiet pyyaml
+          python3 scripts/validate_manifests.py
+
+      - name: Generator parses without fetched logs
+        run: |
+          mkdir -p _logs
+          python3 scripts/generate_project_docs.py _logs

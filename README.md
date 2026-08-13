@@ -13,7 +13,16 @@ Docs folder in that repo mirrors the live workflow/scripts/patches.
 2. If your build fails to install: `docs/03-apk-not-installed.md`.
 3. If you are stuck reaching the device without USB: `docs/02-device-access-and-transfer.md`.
 4. If you are building on GitHub Actions: `docs/04-build-pipeline-blueprint.md` + `docs/05-github-free-tier-operations.md`.
-5. If you want the whole story: `docs/09-field-notes-journey.md` (chronological problem log).
+5. For the whole story of a project: `projects/<slug>/README.md` (auto-synced journey).
+6. To add a NEW project/app: copy `projects/_template/`, fill the manifest, see `AGENTS.md`.
+
+## Projects
+
+See the auto-generated index: `projects/README.md`.
+Each project's problems->solutions log is fetched automatically from its own
+repo by the `Playbook Sync` workflow (weekly + manual + `repository_dispatch`
+type `field-notes-sync`), so the playbook grows on its own as you build more
+special editions.
 
 Everything here is free-infrastructure only (GitHub Actions/Releases), no paid CI.
 

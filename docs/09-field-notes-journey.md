@@ -68,5 +68,3 @@ race, not the command. Fix by staging on-device + verifying size/content, then
 retry. This pattern solved the most frustrating debugging hours.
 
 <!-- generated; do not hand-edit -->
-
-<!-- DRIFT-TEST-MARKER -->

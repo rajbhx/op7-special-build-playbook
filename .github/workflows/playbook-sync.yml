@@ -1,0 +1,59 @@
+name: Playbook Sync
+
+# Auto-updates the journey doc from the machine-readable field-notes log in
+# rajbhx/iceraven-op7 (docs/field-notes/log.yml). Weekly + manual + dispatch.
+# No secrets needed: the source repo is public and GITHUB_TOKEN is enough.
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [field-notes-sync]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Regenerate field notes from iceraven-op7 log
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch source log (public repo)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/rajbhx/iceraven-op7/contents/docs/field-notes/log.yml \
+            -H "Accept: application/vnd.github.raw" > /tmp/field-notes-log.yml
+          wc -l /tmp/field-notes-log.yml
+
+      - name: Install PyYAML
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Generate journey doc
+        run: python3 scripts/generate_field_notes.py /tmp/field-notes-log.yml docs/09-field-notes-journey.md
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet docs/09-field-notes-journey.md; then
+            echo "no changes; nothing to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/09-field-notes-journey.md
+            git commit -m "chore(field-notes): auto-sync from iceraven-op7 log"
+            git push
+            echo "pushed updated field notes"
+          fi
+
+      - name: Write summary
+        if: always()
+        run: |
+          {
+            echo "## Playbook sync"
+            echo "- source: \`rajbhx/iceraven-op7\` \`docs/field-notes/log.yml\`"
+            echo "- regenerated: \`docs/09-field-notes-journey.md\`"
+            echo "- schedule: weekly + manual dispatch + \`repository_dispatch\` type \`field-notes-sync\`"
+          } >> "$GITHUB_STEP_SUMMARY"

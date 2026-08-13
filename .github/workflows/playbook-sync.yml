@@ -7,11 +7,13 @@ name: Playbook Sync
 #   projects/<slug>/README.md + projects/README.md   (project cards)
 #   notes/<slug>/* + notes/README.md                 (searchable helper layer)
 #   docs/09-field-notes-journey.md                   (human journey)
-# Weekly + manual + repository_dispatch (type: field-notes-sync).
+# Every 6h + manual + repository_dispatch (type: field-notes-sync).
+# 6h cadence keeps notes fresh after any project push and resets the
+# 60-day scheduled-workflow inactivity window; no cross-repo secrets needed.
 
 on:
   schedule:
-    - cron: '0 3 * * 1'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
   repository_dispatch:
     types: [field-notes-sync]

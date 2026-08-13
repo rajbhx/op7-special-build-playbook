@@ -227,7 +227,36 @@ def main() -> None:
             sess_lines.append("")
             with open(os.path.join(slug_notes, "SESSIONS.md"), "w") as f:
                 f.write("\n".join(sess_lines))
-        print(f"notes: {slug} — {len(entries)} entries, {len(kw_map)} keywords, {len(sessions)} session(s)")
+
+        # conversation knowledge (typed, extracted by conversation_to_notes.py)
+        convos = sorted(p for p in glob.glob(os.path.join(logs_dir, "conversations", slug, "*.md"))
+                        if not os.path.basename(p).startswith("_"))
+        if convos:
+            conv_lines = [
+                f"# Conversation knowledge — {slug}",
+                "",
+                "User instructions/decisions extracted from Codex sessions as typed",
+                "entries (RULE/DECISION/REQUEST/GOTCHA/GOAL). Raw transcripts are",
+                "never stored — only the useful learned types.",
+                "",
+                "| File | First entries |",
+                "|---|---|",
+            ]
+            for cp in convos:
+                name = os.path.basename(cp)
+                preview = []
+                with open(cp) as f:
+                    for line in f:
+                        line = line.strip()
+                        if line.startswith("- `") and len(preview) < 2:
+                            preview.append(line[:110])
+                conv_lines.append(f"| {name} | {'<br>'.join(preview) or '—'} |")
+            conv_lines.append("")
+            with open(os.path.join(slug_notes, "CONVERSATIONS.md"), "w") as f:
+                f.write("\n".join(conv_lines))
+
+        print(f"notes: {slug} — {len(entries)} entries, {len(kw_map)} keywords, "
+              f"{len(sessions)} session(s), {len(convos)} conversation(s)")
 
     # agent-facing usage guide
     guide = [

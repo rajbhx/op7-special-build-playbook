@@ -35,6 +35,7 @@ jobs:
           mkdir -p _logs
           FOUND=0
           SESSIONS=0
+          CONVERSATIONS=0
           for MANIFEST in projects/*/manifest.yml; do
             SLUG="$(basename "$(dirname "$MANIFEST")")"
             [ "$SLUG" = "_template" ] && continue
@@ -56,9 +57,19 @@ jobs:
                   SESSIONS=$((SESSIONS+1))
                 fi
               done
+              # typed conversation knowledge (RULE/DECISION/GOTCHA/...) ->
+              # _logs/conversations/<slug>/*.md (skip _template)
+              CONV_DIR="$(dirname "$PATH_FIELD")/conversations"
+              mkdir -p "_logs/conversations/$SLUG"
+              for F in $(gh api "repos/$REPO/contents/$CONV_DIR" --jq '.[].name' 2>/dev/null | grep -E '^[^_].*\.md$'); do
+                if gh api "repos/$REPO/contents/$CONV_DIR/$F" -H "Accept: application/vnd.github.raw" > "_logs/conversations/$SLUG/$F" 2>/dev/null; then
+                  echo "  conversation: $SLUG/$F"
+                  CONVERSATIONS=$((CONVERSATIONS+1))
+                fi
+              done
             fi
           done
-          echo "logs fetched: $FOUND | session digests fetched: $SESSIONS"
+          echo "logs fetched: $FOUND | session digests fetched: $SESSIONS | conversations fetched: $CONVERSATIONS"
 
       - name: Install PyYAML
         run: python3 -m pip install --quiet pyyaml

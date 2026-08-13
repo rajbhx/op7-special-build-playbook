@@ -45,7 +45,8 @@ Auto-maintained knowledge base + workflows for building device-specific Android 
 
 1. Write `docs/field-notes/sessions/<date>-<topic>.md` (see `_template.md`): `**P** problem` / `cause:` / `solution:` / `section:` / optional `tags:`.
 2. Run `python3 automation/op7/session_to_notes.py <digest>` → appends to `docs/field-notes/log.yml` (dedupes, auto-ids, preserves tags).
-3. Commit + push. Playbook sync (weekly + manual + `repository_dispatch` type `field-notes-sync`) regenerates the notes layer automatically.
+3. Run `python3 automation/op7/conversation_to_notes.py` → archives the useful typed knowledge (RULE/DECISION/REQUEST/GOTCHA/GOAL) from the local Codex session into `docs/field-notes/conversations/` (local-only tool; no raw transcripts, trimmed to 300 chars per entry).
+4. Commit + push. Playbook sync (every 6h + manual + `repository_dispatch` type `field-notes-sync`) regenerates the notes layer automatically.
 
 ## References (load on demand)
 

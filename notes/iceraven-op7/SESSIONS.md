@@ -16,4 +16,6 @@ in the build repo. Synced copies for offline search.
 | 2026-08-13-notes-layer.md | Session digest — 2026-08-13 — Playbook helper layer: searchable low-token notes |
 | 2026-08-13-r3-r4.md | Session digest — 2026-08-13 — Phase 2 baseline, r3 (DeviceCapabilities), r4 (seamless launch) |
 | 2026-08-13-r4-install-fingerprint.md | Session digest — 2026-08-13 — r4 install via /sdcard path + Phase 5 fingerprint |
+| 2026-08-13-r5-amoled.md | Session digest — 2026-08-13 — r5 AMOLED true-black dark theme + C5 layer verification |
 | 2026-08-13-r5-media.md | Session digest — 2026-08-13 — r5 (C1): hardware media codec verification |
+| 2026-08-13-r6-settings-black-fix.md | Session digest — 2026-08-13 — r6 settings black-void fix (AMOLED) |

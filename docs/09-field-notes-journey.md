@@ -74,6 +74,15 @@ Chronological log from the field. Reusable for any app.
 |---|---|---|---|
 | F1 | visible color jump between splash and home screen on launch | hard-coded splash brand color (#FCF3EE / #210340) differs from home surface (#F7F6FB / #1D1B1F) | splash background references @color/fx_mobile_surface (patch 004) — seamless iOS-style launch, cosmetic only |
 
+### G. Playbook & knowledge
+
+| # | Problem | Root cause | Solution |
+|---|---|---|---|
+| G1 | full journey tables (docs/09, projects/*/README.md) cost agents too many tokens | every entry rendered in one big markdown table; an agent must read all of it to find one answer | notes/ layer — INDEX.md keyword->ids map (grep-able, ~150 lines), one entries/<id>.md per problem, lookup.py ranked search; agents read only the matching entry |
+| G2 | keyword auto-extraction produced a noisy index (478 lines of '1.5', '2-core', 'add') | naive tokenization of problem+cause+solution text | curated INDEX from problem text + explicit tags only; full text kept in index.json for ranked lookup.py matching; stopwords + prefix-collapse |
+| G3 | conversation digests lived only in the build repo, not the playbook | playbook sync fetched only log.yml | sync also lists docs/field-notes/sessions and fetches each *.md (skip _template) into _logs/sessions/<slug>/; SESSIONS.md generated with summaries |
+| G4 | optional tags would be stripped by session_to_notes re-render | canonical renderer wrote only id/problem/cause/solution | renderer + digest parser now carry tags: [...] through |
+
 ### Recurring failure signature
 
 If output is "sometimes there, sometimes not": it is almost always a transport

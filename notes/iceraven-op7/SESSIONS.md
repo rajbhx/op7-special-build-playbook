@@ -9,6 +9,7 @@ in the build repo. Synced copies for offline search.
 | 2026-08-13-c2-background.md | Session digest — 2026-08-13 — C2: background discipline baseline |
 | 2026-08-13-c3-done.md | Session digest — 2026-08-13 — C3 verified: process cap, memory flat vs tabs |
 | 2026-08-13-c3-tab-check.md | Session digest — 2026-08-13 — C3 measurement correction: VIEW intents do not create tabs |
+| 2026-08-13-c45-smoothness.md | Session digest — 2026-08-13 — C4/C5: smoothness baseline |
 | 2026-08-13-cleanup-undo.md | Session digest — 2026-08-13 — cleanup undo: restore disabled packages |
 | 2026-08-13-devtools-socket.md | Session digest — 2026-08-13 — devtools socket exploration (dead end, documented) |
 | 2026-08-13-notes-layer.md | Session digest — 2026-08-13 — Playbook helper layer: searchable low-token notes |

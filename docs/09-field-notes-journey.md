@@ -1,39 +1,11 @@
-# Iceraven OP7
+# 09 — Field notes: problems we actually hit and how we solved them
 
-> Auto-generated from `projects/iceraven-op7/manifest.yml` and the
-> project's field-notes log. Do not hand-edit the journey section.
+> Auto-generated from `docs/field-notes/log.yml` in the `iceraven-op7` build repo
+> by `.github/workflows/playbook-sync.yml` -> `scripts/build_notes.py`. Do not hand-edit.
+> For agent use, search the compact layer: `scripts/lookup.py <words>` or
+> grep `notes/iceraven-op7/INDEX.md`.
 
-## Project
-
-| Field | Value |
-|---|---|
-| Description | OnePlus 7 optimized Iceraven (GeckoView) distribution, arm64-v8a only |
-| Build repo | https://github.com/rajbhx/iceraven-op7 |
-| Upstream | https://github.com/fork-maintainers/iceraven-browser |
-| Engine | geckoview |
-| Target device | OnePlus 7 (GM1901) |
-| ABI | arm64-v8a |
-| Status | active |
-| Maintainer | rajbhx |
-| Patches ref | patches/op7/ |
-
-## Phases
-
-| Phase | Status |
-|---|---|
-| 0 | done |
-| 1 | done |
-| 10 | pending |
-| 2 | in-progress |
-| 3 | done |
-| 4 | done |
-| 5 | planning |
-| 6 | pending |
-| 7 | pending |
-| 8 | pending |
-| 9 | pending |
-
-## Field notes (auto-synced)
+Chronological log from the field. Reusable for any app.
 
 ### A. Build pipeline
 

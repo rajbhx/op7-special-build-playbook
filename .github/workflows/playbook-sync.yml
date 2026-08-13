@@ -1,8 +1,12 @@
 name: Playbook Sync
 
-# Auto-updates the playbook from every registered project's field-notes log.
-# Reads projects/*/manifest.yml, fetches each log (public repos, GITHUB_TOKEN
-# is enough), regenerates projects/<slug>/README.md + projects/README.md.
+# Auto-updates the playbook from every registered project's field-notes log
+# and conversation digests. Reads projects/*/manifest.yml, fetches each log
+# and its docs/field-notes/sessions/*.md (public repos, GITHUB_TOKEN is
+# enough), then regenerates:
+#   projects/<slug>/README.md + projects/README.md   (project cards)
+#   notes/<slug>/* + notes/README.md                 (searchable helper layer)
+#   docs/09-field-notes-journey.md                   (human journey)
 # Weekly + manual + repository_dispatch (type: field-notes-sync).
 
 on:
@@ -17,17 +21,18 @@ permissions:
 
 jobs:
   sync:
-    name: Fetch logs and regenerate project docs
+    name: Fetch logs/sessions and regenerate docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch field-notes logs for all projects
+      - name: Fetch field-notes logs + session digests for all projects
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p _logs
           FOUND=0
+          SESSIONS=0
           for MANIFEST in projects/*/manifest.yml; do
             SLUG="$(basename "$(dirname "$MANIFEST")")"
             [ "$SLUG" = "_template" ] && continue
@@ -35,20 +40,36 @@ jobs:
             PATH_FIELD="$(grep -A2 '^  field_notes:' "$MANIFEST" | sed -n 's/^    path: *//p' | head -1)"
             if [ -n "$REPO" ] && [ -n "$PATH_FIELD" ]; then
               if gh api "repos/$REPO/contents/$PATH_FIELD" -H "Accept: application/vnd.github.raw" > "_logs/$SLUG.yml" 2>/dev/null; then
-                echo "fetched $SLUG <- $REPO:$PATH_FIELD ($(wc -l < "_logs/$SLUG.yml") lines)"
+                echo "fetched log: $SLUG <- $REPO:$PATH_FIELD ($(wc -l < "_logs/$SLUG.yml") lines)"
                 FOUND=$((FOUND+1))
               else
                 echo "::warning::could not fetch log for $SLUG ($REPO:$PATH_FIELD)"
               fi
+              # conversation digests -> _logs/sessions/<slug>/*.md (skip _template)
+              SESS_DIR="$(dirname "$PATH_FIELD")/sessions"
+              mkdir -p "_logs/sessions/$SLUG"
+              for F in $(gh api "repos/$REPO/contents/$SESS_DIR" --jq '.[].name' 2>/dev/null | grep -E '^[^_].*\.md$'); do
+                if gh api "repos/$REPO/contents/$SESS_DIR/$F" -H "Accept: application/vnd.github.raw" > "_logs/sessions/$SLUG/$F" 2>/dev/null; then
+                  echo "  session: $SLUG/$F"
+                  SESSIONS=$((SESSIONS+1))
+                fi
+              done
             fi
           done
-          echo "logs fetched: $FOUND"
+          echo "logs fetched: $FOUND | session digests fetched: $SESSIONS"
 
       - name: Install PyYAML
         run: python3 -m pip install --quiet pyyaml
 
-      - name: Generate project docs
-        run: python3 scripts/generate_project_docs.py _logs
+      - name: Generate project cards + notes layer
+        run: |
+          python3 scripts/generate_project_docs.py _logs
+          python3 scripts/build_notes.py _logs
+
+      - name: Verify lookup helper works against generated notes
+        run: |
+          python3 scripts/lookup.py shizuku || true
+          python3 scripts/lookup.py --tags >/dev/null
 
       - name: Commit and push if changed
         run: |
@@ -57,10 +78,10 @@ jobs:
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add projects/
-            git commit -m "chore(playbook): auto-sync project docs from field-notes logs"
+            git add projects/ notes/ docs/09-field-notes-journey.md
+            git commit -m "chore(playbook): auto-sync project docs + searchable notes layer"
             git push
-            echo "pushed updated project docs"
+            echo "pushed updated docs"
           fi
 
       - name: Write summary
@@ -68,7 +89,8 @@ jobs:
         run: |
           {
             echo "## Playbook sync"
-            echo "- fetched logs for all projects registered in \`projects/*/manifest.yml\`"
-            echo "- regenerated \`projects/<slug>/README.md\` + \`projects/README.md\`"
+            echo "- fetched logs + session digests for all projects in \`projects/*/manifest.yml\`"
+            echo "- regenerated \`projects/<slug>/README.md\`, \`notes/<slug>/*\` (searchable), \`docs/09-field-notes-journey.md\`"
+            echo "- agent lookup: \`python3 scripts/lookup.py <words>\` or grep \`notes/*/INDEX.md\`"
             echo "- triggers: weekly + manual + \`repository_dispatch\` type \`field-notes-sync\`"
           } >> "$GITHUB_STEP_SUMMARY"

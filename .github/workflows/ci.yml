@@ -28,7 +28,9 @@ jobs:
           python3 -m pip install --quiet pyyaml
           python3 scripts/validate_manifests.py
 
-      - name: Generator parses without fetched logs
+      - name: Generators parse without fetched logs
         run: |
           mkdir -p _logs
           python3 scripts/generate_project_docs.py _logs
+          python3 scripts/build_notes.py _logs
+          python3 -m py_compile scripts/build_notes.py scripts/lookup.py

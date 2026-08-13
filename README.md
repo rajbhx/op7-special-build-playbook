@@ -9,6 +9,9 @@ Docs folder in that repo mirrors the live workflow/scripts/patches.
 
 ## How to use this
 
+0. **Agents**: search first, read only what matches —
+   `python3 scripts/lookup.py <problem words>` (or grep `notes/*/INDEX.md`).
+   Full-detail files: `notes/<slug>/entries/<id>.md`. See `AGENTS.md`.
 1. Read `docs/00-quickstart.md` for the order of operations (baseline before optimization).
 2. If your build fails to install: `docs/03-apk-not-installed.md`.
 3. If you are stuck reaching the device without USB: `docs/02-device-access-and-transfer.md`.

@@ -6,6 +6,7 @@ in the build repo. Synced copies for offline search.
 | File | Summary |
 |---|---|
 | 2026-08-13-c1-reverify.md | Session digest — 2026-08-13 — C1 re-verification (honest media playback proof) |
+| 2026-08-13-c2-background.md | Session digest — 2026-08-13 — C2: background discipline baseline |
 | 2026-08-13-c3-done.md | Session digest — 2026-08-13 — C3 verified: process cap, memory flat vs tabs |
 | 2026-08-13-c3-tab-check.md | Session digest — 2026-08-13 — C3 measurement correction: VIEW intents do not create tabs |
 | 2026-08-13-cleanup-undo.md | Session digest — 2026-08-13 — cleanup undo: restore disabled packages |

@@ -9,7 +9,7 @@ Auto-maintained knowledge base + workflows for building device-specific Android 
 
 ## Repos
 
-- Build: `rajbhx/iceraven-op7` — Iceraven (Fenix fork); OP7 changes live only in `patches/op7/NNN-*.patch` (apply in order 001→002→003→004); revision in `op7-revision.txt`; APK version `iceraven-<upstream-ver>-op7r<rev>`; ABI arm64-v8a only.
+- Build: `rajbhx/iceraven-op7` — Iceraven (Fenix fork); OP7 changes live only in `patches/op7/NNN-*.patch` (apply in order 001→006; latest r7 = pure-black AMOLED + OnePlus red accent); revision in `op7-revision.txt`; APK version `iceraven-<upstream-ver>-op7r<rev>`; ABI arm64-v8a only.
 - Playbook: `rajbhx/op7-special-build-playbook` — searchable knowledge base, auto-synced from the build repo's `docs/field-notes/log.yml` + session digests.
 
 ## Search first (never re-derive)

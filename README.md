@@ -19,12 +19,13 @@ Docs folder in that repo mirrors the live workflow/scripts/patches.
 4. If you are building on GitHub Actions: `docs/04-build-pipeline-blueprint.md` + `docs/05-github-free-tier-operations.md`.
 5. For the whole story of a project: `projects/<slug>/README.md` (auto-synced journey).
 6. To add a NEW project/app: copy `projects/_template/`, fill the manifest, see `AGENTS.md`.
+7. Pure-black AMOLED theming + brand accent for Fenix forks: `docs/11-amoled-theming.md`.
 
 ## Projects
 
 See the auto-generated index: `projects/README.md`.
 Each project's problems->solutions log is fetched automatically from its own
-repo by the `Playbook Sync` workflow (weekly + manual + `repository_dispatch`
+repo by the `Playbook Sync` workflow (every 6h + manual + `repository_dispatch`
 type `field-notes-sync`), so the playbook grows on its own as you build more
 special editions.
 

@@ -2,10 +2,17 @@
 
 The phase order is enforced, not suggested. Skipping it caused every rework.
 
-## Before anything: refresh this skill
+## Before anything: connect + refresh this skill
 
-Agents should run the skill's self-update at session start so the playbook
-knowledge is current:
+New agent/machine — connect once with the playbook's installer:
+
+```
+git clone --depth 1 https://github.com/rajbhx/op7-special-build-playbook
+bash op7-special-build-playbook/scripts/install_skill.sh
+```
+
+Then (every session) refresh the installed skill so the playbook knowledge is
+current:
 
 ```
 bash /root/.shared-skills/op7-special-build/scripts/update_skill.sh

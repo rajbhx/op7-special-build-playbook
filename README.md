@@ -54,7 +54,7 @@ that stuck. Built to be reused for other apps and other special builds.
 | `06-upstream-automation.md` | upstream sync/conflict handling |
 | `07-on-device-benchmarking.md` | measurement methodology |
 | `08-versioning-reproducibility.md` | version identity + reproducible builds |
-| `09-field-notes-journey.md` | human-readable journey (auto-synced) |
+| `09-field-notes-journey.md` | human-readable journey (auto-synced) _(auto-generated)_ |
 | `10-porting-playbook.md` | porting this to another app, step by step |
 | `11-amoled-theming.md` | pure-black AMOLED theming + brand accent for Fenix forks |
 

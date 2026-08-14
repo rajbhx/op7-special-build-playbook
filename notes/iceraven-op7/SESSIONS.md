@@ -20,5 +20,6 @@ in the build repo. Synced copies for offline search.
 | 2026-08-13-r5-media.md | Session digest — 2026-08-13 — r5 (C1): hardware media codec verification |
 | 2026-08-13-r6-settings-black-fix.md | Session digest — 2026-08-13 — r6 settings black-void fix (AMOLED) |
 | 2026-08-13-r6b-playbook-conversation-sync.md | Session digest — 2026-08-13 — r6b: playbook sync gap + conversation knowledge |
+| 2026-08-14-playbook-sync-schema.md | Session digest — 2026-08-14 — Playbook sync log-schema fixes |
 | 2026-08-14-port-deepdenoiser-rain.md | Session digest — 2026-08-14 — Port DeepDenoiser + Rain to OP7 |
 | 2026-08-14-r7-pureblack-onephus.md | Session digest — 2026-08-14 — r7 pure-black everywhere + OnePlus red accent |

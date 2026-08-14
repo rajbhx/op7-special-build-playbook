@@ -54,3 +54,6 @@ Auto-maintained knowledge base + workflows for building device-specific Android 
 - `references/pipeline.md` — CI workflows, secrets, caches, validation gates, release flow, versioning
 - `references/device-facts.md` — verified OP7 hardware facts + how to verify on-device (Phase 5)
 - `references/playbook.md` — knowledge loop, lookup usage, adding a new app/project
+- `references/expo-rn-porting.md` — porting an Expo/RN app (DeepDenoiser pattern): no-EAS prebuild, lockfile pinning, ONNX NDK combo, badging gate
+- `references/rain-ecosystem.md` — ra1ncord org map: rainManager APK + rain bundle, lspatch assets, Codeberg mirror
+- `references/field-notes-sync.md` — canonical log schema, tags rules, journey selection, new-project checklist

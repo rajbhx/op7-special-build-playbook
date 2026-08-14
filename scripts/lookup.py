@@ -100,7 +100,7 @@ def main():
         i = args.index("-s")
         if i + 1 >= len(args):
             sys.exit("-s requires a slug")
-        slug = args.pop(i)
+        slug = args.pop(i + 1)
         args.pop(i)
     entries = load_indexes(slug)
     if not args:

@@ -23,6 +23,18 @@ that stuck. Built to be reused for other apps and other special builds.
      `python3 scripts/lookup.py <problem words>` (or grep `notes/*/INDEX.md`).
      Full-detail files: `notes/<slug>/entries/<id>.md`. See `AGENTS.md`.
 
+## Repo map
+
+| Path | What it is |
+|---|---|
+| `docs/` | hand-edited guides `00`–`11` (`09-field-notes-journey.md` is auto-generated) |
+| `notes/` | generated, searchable problem→solution layer (`INDEX.md`, `entries/<id>.md`, `CONVERSATIONS.md`) — never hand-edit |
+| `projects/` | one folder per special build; `manifest.yml` hand-edited, `README.md` auto-generated |
+| `scripts/` | tooling: `lookup.py` search, `validate_manifests.py`, doc generators, `install_skill.sh` |
+| `skills/` | the `op7-special-build` Codex skill (canonical source, self-updating) |
+| `templates/` | reusable asset templates (e.g. `DeviceCapabilities.kt`) |
+| `.github/workflows/` | CI validation + `Playbook Sync` (every 6h) |
+
 ## Docs
 
 > Two docs intentionally share the `00` prefix: `00-master-spec.md` is the

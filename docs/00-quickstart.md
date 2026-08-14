@@ -2,6 +2,18 @@
 
 The phase order is enforced, not suggested. Skipping it caused every rework.
 
+## Before anything: refresh this skill
+
+Agents should run the skill's self-update at session start so the playbook
+knowledge is current:
+
+```
+bash /root/.shared-skills/op7-special-build/scripts/update_skill.sh
+```
+
+(cheap `git ls-remote` check; sparse fetch + atomic swap only when the
+playbook repo moved; offline keeps the current copy).
+
 1. **Audit** the existing app repo (workflows, build system, release system).
 2. **Build unmodified** — prove the stock build works before touching anything.
 3. **Record the baseline** — upstream commit, versions (browser, GeckoView/engine, Gradle, JDK, SDK), exact build command, APK SHA-256, ABI.

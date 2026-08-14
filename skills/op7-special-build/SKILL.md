@@ -7,6 +7,27 @@ description: Field-proven workflows and lessons for device-specific Android app 
 
 Auto-maintained knowledge base + workflows for building device-specific Android app distributions (Iceraven + GeckoView on OnePlus 7), designed to be reused for other apps and understood by other AI agents.
 
+## Self-update (run this first)
+
+This skill is a live copy of `rajbhx/op7-special-build-playbook` →
+`skills/op7-special-build/`. Refresh it in place at the start of a session
+(or whenever knowledge seems stale) with the bundled updater:
+
+```
+bash /root/.shared-skills/op7-special-build/scripts/update_skill.sh
+```
+
+Generic form (any machine): run `scripts/update_skill.sh` from the skill
+directory. Behavior:
+
+- Cheap check first: one `git ls-remote` — a few seconds when up to date.
+- On change: sparse fetch of the skill dir, validation, then an atomic swap
+  with a timestamped backup (`op7-special-build.backup-<timestamp>`).
+- Offline / rate-limited: keeps the current copy and warns — never breaks a
+  session.
+- Env overrides: `PLAYBOOK_REPO` (remote), `SKILL_ROOT` (install root),
+  `EXTRA_SKILL_ROOTS` (space-separated extra roots to update in place).
+
 ## Repos
 
 - Build: `rajbhx/iceraven-op7` — Iceraven (Fenix fork); OP7 changes live only in `patches/op7/NNN-*.patch` (apply in order 001→006; latest r7 = pure-black AMOLED + OnePlus red accent); revision in `op7-revision.txt`; APK version `iceraven-<upstream-ver>-op7r<rev>`; ABI arm64-v8a only.

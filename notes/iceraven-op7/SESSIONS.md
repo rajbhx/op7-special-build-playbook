@@ -22,6 +22,7 @@ in the build repo. Synced copies for offline search.
 | 2026-08-13-r6b-playbook-conversation-sync.md | Session digest — 2026-08-13 — r6b: playbook sync gap + conversation knowledge |
 | 2026-08-14-git-l2s-space-cleanup.md | Session digest — 2026-08-14 — git .l2s space cleanup + object-db recovery |
 | 2026-08-14-lookup-py-slug-flag.md | Session digest — 2026-08-14 — lookup.py -s flag fix in playbook |
+| 2026-08-14-omni-inspiration.md | Session digest — 2026-08-14 — omni-browser inspiration review |
 | 2026-08-14-phase9-autorelease.md | Session digest — 2026-08-14 — Phase 9 auto-release wiring |
 | 2026-08-14-playbook-sync-schema.md | Session digest — 2026-08-14 — Playbook sync log-schema fixes |
 | 2026-08-14-port-deepdenoiser-rain.md | Session digest — 2026-08-14 — Port DeepDenoiser + Rain to OP7 |

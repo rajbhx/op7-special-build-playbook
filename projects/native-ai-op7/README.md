@@ -56,5 +56,6 @@
 | A15 | setContent in MainActivity: 'receiver type mismatch' | androidx.activity.compose.setContent is a ComponentActivity extension; activity extended plain android.app.Activity | extend androidx.activity.ComponentActivity |
 | A16 | memory retrieval ranked by hand-rolled linear recency, not the spec's BM25 × exponential decay | Phase 2 scoring predated the math spec (score = utility*0.5 + recency*0.3 + success*0.2) | ftsCandidates selects bm25(experiences_fts) AS bm25_rank; score = -rank * exp(-0.05*ageDays) + small tiebreaks; decay SQL lambda 0.02 -> 0.05 |
 | A17 | FGS specialUse requires both the permission and the subtype property at targetSdk 34 | Android 14 introduced FOREGROUND_SERVICE_SPECIAL_USE with a required PROPERTY_SPECIAL_USE_FGS_SUBTYPE | declare FOREGROUND_SERVICE + FOREGROUND_SERVICE_SPECIAL_USE + POST_NOTIFICATIONS; service foregroundServiceType=specialUse + property; request POST_NOTIFICATIONS at runtime (API 33+) |
+| A18 | setup-java v4 deprecation annotation; web_search ok flag coupled to a magic string | actions/setup-java@v4 is deprecated; WebSearchTool checked result.startsWith('web search unavailable') | migrate to actions/setup-java@v5; SearchProvider returns SearchResult(text, ok), LocalFallbackProvider ok=false; playbook phase 5 marked done |
 
 <!-- generated; do not hand-edit -->

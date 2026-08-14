@@ -1,2 +1,5 @@
 _logs/
 __pycache__/
+
+# project-intake draft dir (review before committing anything)
+intake-drafts/

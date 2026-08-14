@@ -11,14 +11,20 @@ that stuck. Built to be reused for other apps and other special builds.
 
 ## How to use this
 
-0. **Agents**: connect with the `op7-special-build` Codex skill.
+0. **Agents**: connect with the playbook's Codex skills —
+   `op7-special-build` (device-build workflows) and `project-intake`
+   (classify a new repo + draft its `projects/<slug>/` scaffolding).
    - New machine/agent — one command:
-     `bash scripts/install_skill.sh` (installs into `$CODEX_HOME/skills` or
-     `~/.codex/skills`, records the source commit, self-verifies).
+     `bash scripts/install_skill.sh` (installs ALL skills into
+     `$CODEX_HOME/skills` or `~/.codex/skills`, records the source commit,
+     self-verifies each).
    - Already installed — refresh at session start:
      `bash /root/.shared-skills/op7-special-build/scripts/update_skill.sh`
-     (one `git ls-remote` when up to date; sparse fetch + atomic backup on
-     change; offline-safe).
+     (and the same for `project-intake`; one `git ls-remote` when up to date,
+     sparse fetch + atomic backup on change, offline-safe).
+   - Intake a new project: `python3 skills/project-intake/scripts/intake.py
+     --repo <url|path> --slug <slug> --out .` (drafts for review; never
+     overwrites).
    - No skill support — search first, read only what matches:
      `python3 scripts/lookup.py <problem words>` (or grep `notes/*/INDEX.md`).
      Full-detail files: `notes/<slug>/entries/<id>.md`. See `AGENTS.md`.
@@ -31,7 +37,7 @@ that stuck. Built to be reused for other apps and other special builds.
 | `notes/` | generated, searchable problem→solution layer (`INDEX.md`, `entries/<id>.md`, `CONVERSATIONS.md`) — never hand-edit |
 | `projects/` | one folder per special build; `manifest.yml` hand-edited, `README.md` auto-generated |
 | `scripts/` | tooling: `lookup.py` search, `validate_manifests.py`, doc generators, `install_skill.sh` |
-| `skills/` | the `op7-special-build` Codex skill (canonical source, self-updating) |
+| `skills/` | Codex skills (canonical source, self-updating): `op7-special-build` + `project-intake` |
 | `templates/` | reusable asset templates (e.g. `DeviceCapabilities.kt`) |
 | `.github/workflows/` | CI validation + `Playbook Sync` (every 6h) |
 

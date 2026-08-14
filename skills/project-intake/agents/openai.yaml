@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Intake"
+  short_description: "Classify repos and draft new special-build scaffolding"
+  default_prompt: "Use $skill-name to classify a candidate source repo and draft projects/<slug>/ scaffolding (manifest.yml, roadmap.md, workflow.md, PROMPT.md) for review."

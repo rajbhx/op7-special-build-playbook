@@ -9,11 +9,21 @@ files.
 
 ## Skill for agents
 
-This repo ships the `op7-special-build` Codex skill (see `skills/op7-special-build/`).
-Agents with skill support: the skill auto-triggers on device-specific Android build
-work; inside it, the golden rules + phase order + gotchas are loaded, and it points
-back here for search. Local installs live under the Codex skills dir; keep this repo
-copy as the canonical source (it is versioned with the playbook).
+This repo ships two Codex skills (see `skills/`):
+
+- `op7-special-build` — auto-triggers on device-specific Android build work;
+  loads the golden rules + phase order + gotchas and points back here for
+  search.
+- `project-intake` — given an arbitrary source repo, classifies the stack and
+  auto-drafts a new `projects/<slug>/` entry (`manifest.yml`, `roadmap.md`,
+  `workflow.md`, `PROMPT.md`) for human review; never guesses, never
+  overwrites. Usage: `python3 skills/project-intake/scripts/intake.py
+  --repo <url|path> --slug <slug> [--out <playbook-root>] [--dry-run]`.
+
+Both are self-updating (`scripts/update_skill.sh` inside each skill) and
+installed together by `scripts/install_skill.sh`. Local installs live under the
+Codex skills dir; keep this repo copy as the canonical source (versioned with
+the playbook).
 
 ## Search first, read only what you need (low-token pattern)
 

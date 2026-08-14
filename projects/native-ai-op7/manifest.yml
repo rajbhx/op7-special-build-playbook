@@ -19,10 +19,10 @@ project:
 
   # Phase status per docs/00-quickstart.md (0=audit ... 10=long-term maintenance)
   phases:
-    "0": in-progress   # audit-first per GOLD-STANDARD-SPEC FIRST TASK
-    "1": pending
+    "0": done            # audit done: llama.cpp API, toolchain, CI baseline, JNI surface
+    "1": done            # CI builds stock checkout; APK + badging gate green (A1-A9)
     "2": pending
-    "3": pending
+    "3": done            # GitHub Actions build + badging/ABI/testOnly gates
     "4": pending
     "5": pending
     "6": pending

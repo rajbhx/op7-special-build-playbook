@@ -20,11 +20,15 @@
 
 ## Current state
 
-- `status: planning` — DRAFT skeleton pushed; phase 0 (audit) is in-progress.
+- `status: planning` — phases 0/1/3 done (CI baseline green + badging gate);
+  phase 2 (device baseline) awaits the OP7 on adb.
 - Audit-first rule (spec FIRST TASK): compatibility verdict per subsystem before
   Phase 1 code — llama.cpp API (done vs pinned b10428), NDK toolchain, Snapdragon
   855 ARM64 features, Adreno 640 Vulkan, KV-cache quantization, GGUF mmap, CMake,
   JNI, Android 10 foreground-service restrictions, on-device LoRA feasibility.
+- Spec Phase 1 done: NativeEngine RAII split, MemoryMonitor, streaming
+  (Flow<String>, sampler chain, stop sequences, cancellation).
+- Spec Phase 2 in progress: MemoryDatabase.kt (SQLite + FTS5).
 
 ## Project phases (gold-standard spec)
 

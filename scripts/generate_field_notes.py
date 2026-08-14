@@ -8,12 +8,24 @@ is fetched by .github/workflows/playbook-sync.yml before this script runs.
 import sys
 import yaml
 
+def normalize_log(log):
+    """Accept both canonical {sections:[...]} and flat [entry,...] log shapes.
+
+    Flat lists (older projects) are wrapped into a single section so a
+    malformed log never crashes the whole sync.
+    """
+    if isinstance(log, dict):
+        return log
+    if isinstance(log, list) and all(isinstance(e, dict) for e in log):
+        return {"sections": [{"id": "A", "title": "Field notes", "entries": log}]}
+    return {"sections": []}
+
 def main() -> None:
     if len(sys.argv) != 3:
         sys.exit("usage: generate_field_notes.py <log.yml> <output.md>")
     log_path, out_path = sys.argv[1], sys.argv[2]
     with open(log_path) as f:
-        data = yaml.safe_load(f)
+        data = normalize_log(yaml.safe_load(f))
 
     lines = []
     lines.append("# 09 — Field notes: problems we actually hit and how we solved them")

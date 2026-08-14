@@ -47,6 +47,18 @@ STOPWORDS = {
 }
 
 
+def normalize_log(log):
+    """Accept both canonical {sections:[...]} and flat [entry,...] log shapes.
+
+    Flat lists (older projects) are wrapped into a single section so a
+    malformed log never crashes the whole sync.
+    """
+    if isinstance(log, dict):
+        return log
+    if isinstance(log, list) and all(isinstance(e, dict) for e in log):
+        return {"sections": [{"id": "A", "title": "Field notes", "entries": log}]}
+    return {"sections": []}
+
 def esc_table(value: str) -> str:
     return value.replace("|", "\\|")
 
@@ -72,16 +84,30 @@ def clean_keywords(tokens: set, tags: set) -> list:
     return sorted(tags | kept)
 
 
+def clean_tags(tags) -> set:
+    """Flatten/normalize tags from any shape (flat list, nested list, strings).
+
+    Project logs are external inputs; a malformed tags field must never crash
+    the notes layer.
+    """
+    out = []
+    for t in tags or []:
+        if isinstance(t, list):
+            out.extend(x for x in t if isinstance(x, str))
+        elif isinstance(t, str):
+            out.append(t)
+    return {t.lower() for t in out}
+
 def derive_keywords(entry: dict, section_title: str) -> list:
     """Full-text keywords (problem+cause+solution) for entry files and index.json."""
-    tags = {t.lower() for t in entry.get("tags", [])}
+    tags = clean_tags(entry.get("tags", []))
     tokens = set(tokenize(f"{entry['problem']} {entry['cause']} {entry['solution']} {section_title}"))
     return clean_keywords(tokens, tags)
 
 
 def derive_index_keywords(entry: dict, section_title: str) -> list:
     """Compact curated set for INDEX.md: tags + problem-text words only."""
-    tags = {t.lower() for t in entry.get("tags", [])}
+    tags = clean_tags(entry.get("tags", []))
     tokens = set(tokenize(f"{entry['problem']} {section_title}"))
     return clean_keywords(tokens, tags)
 
@@ -117,19 +143,24 @@ def main() -> None:
     os.makedirs(notes_root, exist_ok=True)
 
     journey_src = None
+    journey_count = 0
     for slug in slugs:
         log_path = os.path.join(logs_dir, f"{slug}.yml")
         with open(log_path) as f:
-            log = yaml.safe_load(f)
+            log = normalize_log(yaml.safe_load(f))
         if not log or not log.get("sections"):
             continue
-        if journey_src is None:
+        count = sum(len(s.get("entries", [])) for s in log["sections"])
+        # The human journey doc keeps the richest log so it never shrinks
+        # when a younger project with fewer entries registers first.
+        if journey_src is None or count > journey_count:
             journey_src = (slug, log)
+            journey_count = count
 
         entries = []
         for section in log["sections"]:
             for entry in section.get("entries", []):
-                entry.setdefault("tags", [])
+                entry["tags"] = sorted(clean_tags(entry.get("tags", [])))
                 keywords = derive_keywords(entry, section["title"])
                 entries.append({
                     "id": entry["id"],

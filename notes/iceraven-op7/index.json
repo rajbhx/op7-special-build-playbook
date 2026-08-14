@@ -70,9 +70,9 @@
    "cause": "GeckoView AAR download + R8 + all ABIs",
    "solution": "arm64-only split, Gradle/Rust/Maven caches, fast=true (no R8) for validation, --parallel when stable",
    "tags": [
+    "abi",
     "build-time",
     "caching",
-    "abi",
     "free-tier"
    ],
    "keywords": [
@@ -111,6 +111,200 @@
    ]
   },
   {
+   "id": "A12",
+   "section": "A",
+   "section_title": "Build pipeline",
+   "problem": "Expo/RN build repos cannot use upstream's EAS-based CI",
+   "cause": "eas build --local needs EAS project ownership + EXPO_TOKEN",
+   "solution": "expo prebuild --platform android --no-install + plain gradle assemble",
+   "tags": [
+    "eas",
+    "expo",
+    "github-actions",
+    "rn"
+   ],
+   "keywords": [
+    "android",
+    "assemble",
+    "build",
+    "cannot",
+    "eas",
+    "eas-based",
+    "expo",
+    "expo_token",
+    "github-actions",
+    "gradle",
+    "local",
+    "needs",
+    "no-install",
+    "ownership",
+    "pipeline",
+    "plain",
+    "platform",
+    "prebuild",
+    "project",
+    "repos",
+    "rn",
+    "upstream"
+   ],
+   "index_keywords": [
+    "build",
+    "cannot",
+    "eas",
+    "eas-based",
+    "expo",
+    "github-actions",
+    "pipeline",
+    "repos",
+    "rn",
+    "upstream"
+   ]
+  },
+  {
+   "id": "A13",
+   "section": "A",
+   "section_title": "Build pipeline",
+   "problem": "Expo SDK 55 lockfile drift broke compile (@siteed/audio-studio 3.2.1)",
+   "cause": "fresh bun.lock resolved siteed 3.2.1 whose Promise.reject(String?,...)",
+   "solution": "pin @siteed/audio-studio=3.0.3 via overrides/bun.lock; verify compile",
+   "tags": [
+    "bun",
+    "compile-error",
+    "expo",
+    "lockfile"
+   ],
+   "keywords": [
+    "audio-studio",
+    "broke",
+    "build",
+    "bun",
+    "bun.lock",
+    "compile",
+    "compile-error",
+    "drift",
+    "expo",
+    "fresh",
+    "lockfile",
+    "overrides",
+    "pipeline",
+    "promise.reject",
+    "resolved",
+    "siteed",
+    "string",
+    "verify",
+    "whose"
+   ],
+   "index_keywords": [
+    "audio-studio",
+    "broke",
+    "build",
+    "bun",
+    "compile",
+    "compile-error",
+    "drift",
+    "expo",
+    "lockfile",
+    "pipeline",
+    "siteed"
+   ]
+  },
+  {
+   "id": "A14",
+   "section": "A",
+   "section_title": "Build pipeline",
+   "problem": "ONNX InferenceSession leaked per denoise job (processing screen)",
+   "cause": "process.tsx creates DeepFilterNet and never calls release(); recording",
+   "solution": "OP7 patch 001 \u2014 release() in finally (stability fix, not perf claim)",
+   "tags": [
+    "memory-leak",
+    "onnx",
+    "stability"
+   ],
+   "keywords": [
+    "build",
+    "calls",
+    "claim",
+    "creates",
+    "deepfilternet",
+    "denoise",
+    "finally",
+    "inferencesession",
+    "leaked",
+    "memory-leak",
+    "onnx",
+    "patch",
+    "perf",
+    "pipeline",
+    "process.tsx",
+    "processing",
+    "recording",
+    "release",
+    "screen",
+    "stability"
+   ],
+   "index_keywords": [
+    "build",
+    "denoise",
+    "inferencesession",
+    "leaked",
+    "memory-leak",
+    "onnx",
+    "pipeline",
+    "processing",
+    "screen",
+    "stability"
+   ]
+  },
+  {
+   "id": "A15",
+   "section": "A",
+   "section_title": "Build pipeline",
+   "problem": "rainManager APK has no native-code badging entry (lspatch libs in assets)",
+   "cause": "lspatch .so injected into patched Discord APK at patch time, not used by",
+   "solution": "validation gate for manager checks package/SDK/testOnly only",
+   "tags": [
+    "abi",
+    "badging",
+    "lspatch",
+    "rain"
+   ],
+   "keywords": [
+    "abi",
+    "assets",
+    "badging",
+    "build",
+    "checks",
+    "discord",
+    "entry",
+    "gate",
+    "injected",
+    "libs",
+    "lspatch",
+    "manager",
+    "native-code",
+    "package",
+    "patched",
+    "pipeline",
+    "rain",
+    "rainmanager",
+    "testonly",
+    "validation"
+   ],
+   "index_keywords": [
+    "abi",
+    "assets",
+    "badging",
+    "build",
+    "entry",
+    "libs",
+    "lspatch",
+    "native-code",
+    "pipeline",
+    "rain",
+    "rainmanager"
+   ]
+  },
+  {
    "id": "A2",
    "section": "A",
    "section_title": "Build pipeline",
@@ -118,9 +312,9 @@
    "cause": "gradle-build-action v3 cleanup incompatible with Gradle 9.5.1",
    "solution": "pin gradle-build-action v2 (upstream-proven)",
    "tags": [
-    "gradle",
     "cache",
-    "github-actions"
+    "github-actions",
+    "gradle"
    ],
    "keywords": [
     "build",
@@ -315,10 +509,10 @@
    "cause": "workers vs heap",
    "solution": "tune GRADLE_OPTS, limit --max-workers, keep release builds serial if flaky",
    "tags": [
-    "r8",
-    "oom",
+    "gradle",
     "memory",
-    "gradle"
+    "oom",
+    "r8"
    ],
    "keywords": [
     "builds",
@@ -525,9 +719,9 @@
    "cause": "90-day default retention",
    "solution": "monthly maintenance workflow prunes >14 d artifacts/caches, keeps newest 20 runs",
    "tags": [
-    "storage",
     "artifacts",
-    "cleanup"
+    "cleanup",
+    "storage"
    ],
    "keywords": [
     "artifacts",
@@ -567,10 +761,10 @@
    "cause": "APK flagged android:testOnly=true (Studio-injected build flag); Android 10 blocks UI installs",
    "solution": "remove injected flag; splits.abi arm64-only; CI badging gate rejects testOnly; verify pm install -r without -t",
    "tags": [
-    "install",
-    "testonly",
     "abi",
-    "app-not-installed"
+    "app-not-installed",
+    "install",
+    "testonly"
    ],
    "keywords": [
     "abi",
@@ -652,8 +846,8 @@
    "cause": "Shizuku server stopped or killed by battery optimization",
    "solution": "shizuku whoami must print 'shell'; retry loops; user reopens Shizuku",
    "tags": [
-    "shizuku",
-    "connection"
+    "connection",
+    "shizuku"
    ],
    "keywords": [
     "battery",
@@ -692,8 +886,8 @@
    "cause": "assistant app foreground; HOME keyevent ineffective in proot env",
    "solution": "verify mCurrentFocus; use explicit component; validate LaunchState/Activity in logs",
    "tags": [
-    "automation",
     "activity",
+    "automation",
     "shizuku"
    ],
    "keywords": [
@@ -740,8 +934,8 @@
    "cause": "launcher activity is the Fenix delegate `.App`, and the package id is io.github.forkmaintainers.iceraven.op7 (not org.mozilla.fenix.iceraven.op7)",
    "solution": "resolve the launcher with `cmd package resolve-activity --brief -c android.intent.category.LAUNCHER <pkg>` before launching",
    "tags": [
-    "install",
     "activity",
+    "install",
     "package-id"
    ],
    "keywords": [
@@ -788,10 +982,10 @@
    "cause": "cleanup removed 12 already-disabled packages via pm uninstall --user 0 without asking first",
    "solution": "restore exactly via `pm install-existing --user 0 <pkg>` then `pm disable-user --user 0 <pkg>`; verify with `pm list packages -d` matches the original list. Rule: on a daily-driver, present a candidate list and get a go-ahead before uninstalling packages; files/app-data need explicit confirmation too",
    "tags": [
-    "uninstall",
+    "daily-driver",
     "restore",
     "safety",
-    "daily-driver"
+    "uninstall"
    ],
    "keywords": [
     "already-disabled",
@@ -886,10 +1080,10 @@
    "cause": "proot runs inside the app (gptos.intelligence.assistant); its /storage/emulated/0 is an app-private bind, not the real /sdcard",
    "solution": "proot shares the device network, so serve the APK with a persistent loopback HTTP server (setsid nohup python3 -m http.server) and pull with curl on the real shell to /sdcard/Download/op7/; verify size; copy to /data/local/tmp then pm install -r",
    "tags": [
-    "transfer",
-    "shizuku",
+    "loopback",
     "sdcard",
-    "loopback"
+    "shizuku",
+    "transfer"
    ],
    "keywords": [
     "app-private",
@@ -949,10 +1143,10 @@
    "cause": "hardware decoders exist (Phase 5) but usage was unverified; changing prefs on assumptions is banned by the golden rule",
    "solution": "media_probe.sh \u2014 force-stop, clear logcat, open a direct 1080p clip in Iceraven, sample top every 4s, dump logcat + dumpsys media.player; GeckoView's HardwareCodecCapability log names the selected decoder",
    "tags": [
-    "media",
     "codec",
-    "verification",
-    "cpu"
+    "cpu",
+    "media",
+    "verification"
    ],
    "keywords": [
     "assumptions",
@@ -1019,8 +1213,8 @@
    "cause": "naive grep of leading digits grabbed the wrong column from top output",
    "solution": "report peak from raw per-process samples; verify against cpu-all.txt before trusting a number",
    "tags": [
-    "measurement",
     "cpu",
+    "measurement",
     "parsing"
    ],
    "keywords": [
@@ -1073,9 +1267,9 @@
    "cause": "repeated `am start -a VIEW -d <url>` on an already-foreground Fenix reuses the existing tab/task instead of creating new tabs; user confirmed no new tabs appeared",
    "solution": "validate tab creation before measuring (uiautomator dump + user observation); VIEW-intent counts are not tab counts. Correct path: user opens tabs manually, or tap the real \"New tab\" toolbar node (from the Iceraven a11y dump) then drive the awesome bar",
    "tags": [
-    "tabs",
-    "measurement",
     "intent",
+    "measurement",
+    "tabs",
     "ui-automation"
    ],
    "keywords": [
@@ -1145,9 +1339,9 @@
    "cause": "the assistant host app renders its own floating UI on top; `uiautomator dump` captured that package's nodes",
    "solution": "grep the dump for package=\"...iceraven...\" and confirm mCurrentFocus before trusting coordinates/taps",
    "tags": [
+    "overlay",
     "shizuku",
-    "ui-automation",
-    "overlay"
+    "ui-automation"
    ],
    "keywords": [
     "a11y",
@@ -1200,10 +1394,10 @@
    "cause": "repeated VIEW intents reuse the current tab (see D13); UI automation is blocked by the host app overlay (D14)",
    "solution": "collaborative measurement \u2014 user opens 3/6/10 tabs by hand, `baseline_capture.sh state <n>` captures meminfo + processes as-is without force-stop",
    "tags": [
-    "tabs",
-    "memory",
+    "collaboration",
     "measurement",
-    "collaboration"
+    "memory",
+    "tabs"
    ],
    "keywords": [
     "as-is",
@@ -1322,10 +1516,10 @@
    "cause": "GeckoView's remote debugger listens on a Unix abstract socket (io.github.forkmaintainers.iceraven.op7/firefox-debugger-socket), not TCP; adb forward is the normal bridge",
    "solution": "verified via logcat `GeckoViewRemoteDebugger: listening on .../firefox-debugger-socket`",
    "tags": [
-    "devtools",
     "debugging",
-    "socket",
-    "geckoview"
+    "devtools",
+    "geckoview",
+    "socket"
    ],
    "keywords": [
     "abstract",
@@ -1372,10 +1566,10 @@
    "cause": "SELinux denies the proot app domain (EACCES on connect); shell toybox nc has no -U; user declined adb authorization",
    "solution": "accept the constraint \u2014 devtools measurement channel is unavailable on this setup; keep Shizuku dumpsys/top/logcat as the measurement stack",
    "tags": [
-    "devtools",
-    "selinux",
     "adb",
-    "constraint"
+    "constraint",
+    "devtools",
+    "selinux"
    ],
    "keywords": [
     "abstract",
@@ -1428,11 +1622,11 @@
    "cause": "r5 probe logged HardwareCodecCapability decoder selection + low CPU, but the probe clip URLs were 404, so no MediaCodec session ever ran; 'verified' was inferred, not observed",
    "solution": "prove playback three ways: (1) fixture page beacons currentTime to a local HTTP server every 2 s (time-series must advance), (2) logcat must show a live MediaCodec session (OMX.qcom.video.decoder.*, component_init success, surface generation set) in our media pid, (3) user confirms video visible on screen",
    "tags": [
-    "media",
-    "codecs",
     "c1",
-    "verification",
-    "honest-benchmark"
+    "codecs",
+    "honest-benchmark",
+    "media",
+    "verification"
    ],
    "keywords": [
     "advance",
@@ -1509,9 +1703,9 @@
    "solution": "stage output to on-device temp file; pull with wc -c size probe + retry until sizes match",
    "tags": [
     "capture",
+    "empty-output",
     "shizuku",
-    "transfer",
-    "empty-output"
+    "transfer"
    ],
    "keywords": [
     "bytes",
@@ -1560,10 +1754,10 @@
    "cause": "Gecko pauses muted background media (correct energy behavior); audible media keeps playing with decoder alive",
    "solution": "for background-capable media tests: let the page unmute+play on a user tap (autoplay policy), then capture dumpsys/logcat from the agent side while user keeps chatting",
    "tags": [
-    "media",
+    "autoplay",
     "background",
     "energy",
-    "autoplay"
+    "media"
    ],
    "keywords": [
     "agent",
@@ -1624,8 +1818,8 @@
    "cause": "am start -n on a foreground activity logs 'Activity not started' and only brings the task forward; new tab was never fetched (background tabs don't fetch until foregrounded)",
    "solution": "cold-start reliably: am force-stop, then am start with the intent; or let the chooser resolve (no -n); drive navigation by tapping the URL bar + input text + keyevent 66",
    "tags": [
-    "intents",
     "fenix",
+    "intents",
     "navigation",
     "tabs"
    ],
@@ -1682,11 +1876,11 @@
    "cause": "the alias file 's' has no extension; python http.server serves it as application/octet-stream, and Gecko refuses to render a binary blob as HTML \u2014 page fetches 200 but shows nothing, JS never runs",
    "solution": "always give fixture files a .html extension (or set MIME) \u2014 check Content-Type before relying on a local fixture; blank page + 200 = wrong MIME, not a browser bug",
    "tags": [
-    "media",
+    "debugging",
     "fixtures",
-    "mime",
     "http",
-    "debugging"
+    "media",
+    "mime"
    ],
    "keywords": [
     "alias",
@@ -1748,10 +1942,10 @@
    "cause": "gfxinfo measures only the main process; WebRender content renders in :tab_* and :gpu processes, so page frames never appear in the package's gfxinfo",
    "solution": "measure compositor-level smoothness with dumpsys SurfaceFlinger --latency '<pkg>/<activity>#0' (line 1 = refresh ns, rows = desired/actual/ready); only judge deltas during continuous motion (idle gaps are not jank)",
    "tags": [
-    "smoothness",
     "framestats",
-    "surfaceflinger",
-    "measurement"
+    "measurement",
+    "smoothness",
+    "surfaceflinger"
    ],
    "keywords": [
     "actively",
@@ -1812,11 +2006,11 @@
    "cause": "cold start with VIEW intent restores the old session in front and adds the URL tab in the background; background tabs suspend JS timers/rAF until foregrounded",
    "solution": "foreground-only web tests: have the user paste the URL in the address bar (works reliably), or use the chooser route; don't expect the intent tab to run until it is the active tab",
    "tags": [
-    "tabs",
     "background",
-    "intent",
     "foreground",
-    "gecko"
+    "gecko",
+    "intent",
+    "tabs"
    ],
    "keywords": [
     "active",
@@ -1876,11 +2070,11 @@
    "cause": "the #0 layer is the activity/chrome surface; GeckoView web content composites into the child SurfaceView layer, which only exists while the browser is visible",
    "solution": "capture dumpsys SurfaceFlinger --latency with the SurfaceView layer name from --list (SurfaceView - <pkg>/<activity>#0); verify the surface is active (many frames) before trusting jank numbers; gfxinfo <pkg> = chrome only",
    "tags": [
-    "surfaceflinger",
-    "surfaceview",
-    "smoothness",
     "layers",
-    "measurement"
+    "measurement",
+    "smoothness",
+    "surfaceflinger",
+    "surfaceview"
    ],
    "keywords": [
     "active",
@@ -1946,11 +2140,11 @@
    "cause": "rapid force-stop + start cycles under system contention (daily driver in use) hit Binder transaction failures; force-stop needs settle time or the old process survives",
    "solution": "measure cold start as single commands: force-stop, sleep 3, verify no pid, then am start -W; confirm LaunchState: COLD per run; label contended samples honestly",
    "tags": [
-    "startup",
-    "cold-start",
     "binder",
+    "cold-start",
+    "contention",
     "measurement",
-    "contention"
+    "startup"
    ],
    "keywords": [
     "binder",
@@ -2009,10 +2203,10 @@
    "cause": "gfxinfo reports only the main process (UI thread); the real content layer is a SurfaceView under HomeActivity#0",
    "solution": "verify via `dumpsys SurfaceFlinger --list` \u2014 confirmed `SurfaceView - ...HomeActivity#0`; use SurfaceFlinger latency for content frame timing",
    "tags": [
-    "smoothness",
-    "surfaceflinger",
     "layer",
-    "measurement"
+    "measurement",
+    "smoothness",
+    "surfaceflinger"
    ],
    "keywords": [
     "activity",
@@ -2103,9 +2297,9 @@
    "cause": "unreliable network",
    "solution": "local python3 -m http.server loopback transfer; 131 MB in ~1.5 s; SHA-256 verify",
    "tags": [
-    "transfer",
     "artifact",
-    "checksum"
+    "checksum",
+    "transfer"
    ],
    "keywords": [
     "aborts",
@@ -2144,9 +2338,9 @@
    "cause": "FUSE permission model; chmod unsupported",
    "solution": "transfer via app-visible storage or MediaStore; verify sizes",
    "tags": [
+    "permissions",
     "shizuku",
-    "storage",
-    "permissions"
+    "storage"
    ],
    "keywords": [
     "app-visible",
@@ -2221,9 +2415,9 @@
    "cause": "HOME no-op; am finish and am task move-task-to-back unknown on this Android build; BACK intercepted",
    "solution": "record as pending; needs adb or HOME-capable session",
    "tags": [
+    "adb",
     "measurement",
-    "warm-start",
-    "adb"
+    "warm-start"
    ],
    "keywords": [
     "adb",
@@ -2385,9 +2579,9 @@
    "cause": "Preference styleable has no android:background; preference_material.xml root uses only selectableItemBackground ripple; PreferenceFragmentCompat draws rows over colorBackground with a #1f000000 divider",
    "solution": "verified against androidx.preference 1.2.1 AAR (preference-1.2.1.aar) + upstream fenix styles.xml before patching; fixed the actual structure carriers (row surface + dividers) instead of only tokens",
    "tags": [
-    "root-cause",
     "androidx",
-    "resources"
+    "resources",
+    "root-cause"
    ],
    "keywords": [
     "actual",
@@ -2456,9 +2650,9 @@
    "cause": "r5 patch's index lines were hand-assembled (before-hash d74cdcb \u2260 upstream blob cee5b72)",
    "solution": "rebuilt 005 from pristine upstream files in a scratch git repo so index lines are true content hashes; verified git apply --check on fresh baseline and after 004; result files byte-identical to intended state",
    "tags": [
-    "patch",
+    "generation",
     "git-apply",
-    "generation"
+    "patch"
    ],
    "keywords": [
     "apply",
@@ -2505,6 +2699,145 @@
     "real",
     "regenerating",
     "upstream"
+   ]
+  },
+  {
+   "id": "E12",
+   "section": "E",
+   "section_title": "CI quality",
+   "problem": "005 and 006 both edit values-night/colors.xml \u2014 risk of inter-patch hunk overlap breaking the sequence",
+   "cause": "sequential git apply needs non-overlapping context lines",
+   "solution": "generated 005 v3 and 006 as separate commits in a scratch git repo from pristine upstream files, exported real-blob diffs, then verified on a fresh baseline: 005 check+apply OK, 006 check+apply OK, final tree byte-identical to target; no overlap (005 hunks at lines 17-60, 006 at 4-11 + 95-119)",
+   "tags": [
+    "git-apply",
+    "patch-generation",
+    "validation"
+   ],
+   "keywords": [
+    "apply",
+    "baseline",
+    "breaking",
+    "byte-identical",
+    "check+apply",
+    "colors.xml",
+    "commits",
+    "context",
+    "diffs",
+    "edit",
+    "exported",
+    "final",
+    "fresh",
+    "generated",
+    "git-apply",
+    "hunks",
+    "inter-patch",
+    "lines",
+    "needs",
+    "non-overlapping",
+    "overlap",
+    "patch-generation",
+    "pristine",
+    "quality",
+    "real-blob",
+    "repo",
+    "risk",
+    "scratch",
+    "separate",
+    "sequence",
+    "sequential",
+    "target",
+    "tree",
+    "upstream",
+    "validation",
+    "values-night",
+    "verified"
+   ],
+   "index_keywords": [
+    "breaking",
+    "colors.xml",
+    "edit",
+    "git-apply",
+    "hunk",
+    "inter-patch",
+    "overlap",
+    "patch-generation",
+    "quality",
+    "risk",
+    "sequence",
+    "validation",
+    "values-night"
+   ]
+  },
+  {
+   "id": "E13",
+   "section": "E",
+   "section_title": "CI quality",
+   "problem": "005 v3 failed in CI at values-night/colors.xml:39 while local pristine-file verification passed",
+   "cause": "CI applies patches AFTER 004 (seamless launch) and the Iceraven patch layer; 004 already rewrites the splash line (#210340 -> @color/fx_mobile_surface), so 005's combined hunk that edited the same line could not match",
+   "solution": "005 no longer touches the splash line \u2014 004 references fx_mobile_surface, which 005 remaps to novaBlack, so the splash is pure black by reference; re-verified the CI order (pristine -> 004 -> 005 -> 006) in a scratch repo, tree byte-identical to target",
+   "tags": [
+    "004-ownership",
+    "ci",
+    "patch-order",
+    "splash"
+   ],
+   "keywords": [
+    "004-ownership",
+    "applies",
+    "black",
+    "byte-identical",
+    "ci",
+    "color",
+    "colors.xml",
+    "combined",
+    "edited",
+    "failed",
+    "fx_mobile_surface",
+    "hunk",
+    "iceraven",
+    "launch",
+    "layer",
+    "line",
+    "local",
+    "longer",
+    "match",
+    "novablack",
+    "order",
+    "passed",
+    "patch-order",
+    "patches",
+    "pristine",
+    "pristine-file",
+    "pure",
+    "quality",
+    "re-verified",
+    "references",
+    "remaps",
+    "repo",
+    "rewrites",
+    "same",
+    "scratch",
+    "seamless",
+    "splash",
+    "target",
+    "touches",
+    "tree",
+    "values-night",
+    "verification"
+   ],
+   "index_keywords": [
+    "004-ownership",
+    "ci",
+    "colors.xml",
+    "failed",
+    "local",
+    "passed",
+    "patch-order",
+    "pristine-file",
+    "quality",
+    "splash",
+    "values-night",
+    "verification"
    ]
   },
   {
@@ -2578,8 +2911,8 @@
    "cause": "missing import for DeviceCapabilities in HomeActivity; PackageManager.getSystemFeatureInfo/FEATURE_OPENGLES_* unresolved in this module (used deviceConfigurationInfo.reqGlEsVersion instead)",
    "solution": "review imports before shipping a patch; prefer deviceConfigurationInfo for GLES version; ALWAYS re-stage BOTH files before regenerating a patch (git reset unstaged them and the regenerated patch silently lost the HomeActivity hunks)",
    "tags": [
-    "kotlin",
     "compile",
+    "kotlin",
     "patch"
    ],
    "keywords": [
@@ -2634,10 +2967,10 @@
    "cause": "missing DeviceCapabilities import in HomeActivity; PackageManager feature APIs unresolved in this module",
    "solution": "added import; use deviceConfigurationInfo.reqGlEsVersion for GLES; review imports/APIs before dispatching",
    "tags": [
-    "kotlin",
     "compile",
-    "patch",
-    "imports"
+    "imports",
+    "kotlin",
+    "patch"
    ],
    "keywords": [
     "apis",
@@ -2684,8 +3017,8 @@
    "solution": "use fast=true validation builds during patch iteration (compile-level proof, cheap); full R8 only when ready",
    "tags": [
     "build-time",
-    "validation",
-    "fast-build"
+    "fast-build",
+    "validation"
    ],
    "keywords": [
     "build-time",
@@ -2728,8 +3061,8 @@
    "cause": "git reset unstaged files; regenerated diff from only one staged file",
    "solution": "always re-stage ALL touched files before regenerating a patch; verify patch touches expected files (grep '^diff --git')",
    "tags": [
-    "patch",
     "git",
+    "patch",
     "regeneration"
    ],
    "keywords": [
@@ -2773,9 +3106,9 @@
    "cause": "`sed '1,2d'` stripped the ---/+++ pair before the header replacement could run",
    "solution": "insert header before first hunk; verify with `git apply --check` on a fresh post-004 checkout, then full 001\u2192005 sequence on a clean worktree",
    "tags": [
-    "patch",
+    "generation",
     "git-apply",
-    "generation"
+    "patch"
    ],
    "keywords": [
     "apply",
@@ -2823,11 +3156,11 @@
    "cause": "gitignore does NOT support inline comments \u2014 `op7apk/  # comment` makes the whole line a pattern that never matches; only `#` on its own line is a comment",
    "solution": "move comments to their own lines; verify with `git check-ignore -v <path>` before committing large files",
    "tags": [
-    "gitignore",
-    "git",
-    "large-files",
     "apk",
-    "footgun"
+    "footgun",
+    "git",
+    "gitignore",
+    "large-files"
    ],
    "keywords": [
     "apk",
@@ -2876,9 +3209,9 @@
    "cause": "hard-coded splash brand color (#FCF3EE / #210340) differs from home surface (#F7F6FB / #1D1B1F)",
    "solution": "splash background references @color/fx_mobile_surface (patch 004) \u2014 seamless iOS-style launch, cosmetic only",
    "tags": [
+    "perceived-performance",
     "splash",
-    "theming",
-    "perceived-performance"
+    "theming"
    ],
    "keywords": [
     "background",
@@ -2929,9 +3262,9 @@
    "solution": "patch 005 remaps surfaces to #000000 scale with subtle elevation steps (#070707-#242424); contrast 18.6:1 preserved; light theme untouched",
    "tags": [
     "amoled",
-    "dark-theme",
-    "colors",
     "battery",
+    "colors",
+    "dark-theme",
     "resource-only"
    ],
    "keywords": [
@@ -2997,12 +3330,12 @@
    "solution": "r6 gives preference rows a real card surface \u2014 new @layout/op7_preference_row (derived from androidx preference_material 1.2.1, inset 12dp card, rounded 12dp, fill ?attr/colorSurfaceContainer = #1A1A1A = home-card tone) wired via PreferenceTheme.preferenceStyle + SwitchCompatPreferenceMaterialStyle; androidx list dividers neutralized (transparent) so full-width lines don't cross card gaps; container scale lifted off pure black (lowest #0A0A0A < low #121212 < container #1A1A1A < high #1F1F1F < highest #242424) so Compose sub-screens using colorSurfaceContainer* stay visible; background/surface/dim stay true black",
    "tags": [
     "amoled",
-    "settings",
-    "preferences",
-    "theme",
     "colors",
+    "preferences",
+    "r6",
     "resource-only",
-    "r6"
+    "settings",
+    "theme"
    ],
    "keywords": [
     "activity",
@@ -3095,6 +3428,324 @@
    ]
   },
   {
+   "id": "F4",
+   "section": "F",
+   "section_title": "UI / perceived performance",
+   "problem": "user rejected r6 as \"a mix of gray and pureblack\" (screenshot showed #1A1A1A card rows on the pure-black Settings page)",
+   "cause": "r6 container scale lifted off pure black (lowest #0A0A0A < container #1A1A1A < highest #242424) plus layer_color_2/3 and outline tokens still referenced dark greys; every content surface was lit gray on black",
+   "solution": "r7 collapses the ENTIRE dark-theme surface scale to #000000 (background/surface/dim/surface_variant/surface_bright, all surface_container_*, layer_color_2, layer_color_3, splash #210340->#000000) and carries structure with hairlines instead of lit fills: outline #2A2A2A, outline_variant #242424, settings row card gets a 1dp #242424 stroke around its pure-black fill (op7_preference_row_background); result = true pure-black everywhere with cards still distinguishable",
+   "tags": [
+    "amoled",
+    "hairlines",
+    "pureblack",
+    "r7",
+    "resource-only",
+    "theme"
+   ],
+   "keywords": [
+    "amoled",
+    "background",
+    "black",
+    "cards",
+    "carries",
+    "collapses",
+    "container",
+    "content",
+    "dark",
+    "dark-theme",
+    "distinguishable",
+    "entire",
+    "everywhere",
+    "fills",
+    "gets",
+    "gray",
+    "greys",
+    "hairlines",
+    "highest",
+    "instead",
+    "layer_color_2",
+    "layer_color_3",
+    "lifted",
+    "lowest",
+    "op7_preference_row_background",
+    "outline",
+    "outline_variant",
+    "page",
+    "perceived",
+    "performance",
+    "plus",
+    "pure",
+    "pure-black",
+    "pureblack",
+    "r7",
+    "referenced",
+    "rejected",
+    "resource-only",
+    "result",
+    "rows",
+    "scale",
+    "screenshot",
+    "settings",
+    "showed",
+    "splash",
+    "still",
+    "stroke",
+    "structure",
+    "surface",
+    "surface_bright",
+    "surface_container",
+    "surface_variant",
+    "theme",
+    "tokens",
+    "true",
+    "user"
+   ],
+   "index_keywords": [
+    "amoled",
+    "card",
+    "gray",
+    "hairlines",
+    "page",
+    "perceived",
+    "performance",
+    "pure-black",
+    "pureblack",
+    "r7",
+    "rejected",
+    "resource-only",
+    "rows",
+    "screenshot",
+    "settings",
+    "showed",
+    "theme",
+    "user"
+   ]
+  },
+  {
+   "id": "F5",
+   "section": "F",
+   "section_title": "UI / perceived performance",
+   "problem": "user wants the browser to feel OnePlus-branded, not Mozilla-violet",
+   "cause": "fx_mobile_primary + dark-mode accent family map to nova/photon violet palette in values/colors.xml and values-night/colors.xml",
+   "solution": "new 006-op7-onephone-red-accent.patch remaps the accent family to OnePlus red #EB0029 (night primary #EB0029, primary_container #FF4D000F, primary_inverse #FFFF3346, accent_normal_theme #EB0029, high-contrast #FFFF3346, fill-link/cursor/dashboard progress #EB0029; day primary #EB0029, container #FFFFD9DE, inverse #FFFF4D5E); private-mode violet identity kept intact; day accent_normal_theme untouched because it is text color (photonInk20), not brand accent",
+   "tags": [
+    "brand",
+    "colors",
+    "onephus",
+    "r7",
+    "red-accent"
+   ],
+   "keywords": [
+    "accent",
+    "accent_normal_theme",
+    "because",
+    "brand",
+    "browser",
+    "color",
+    "colors",
+    "colors.xml",
+    "container",
+    "cursor",
+    "dark-mode",
+    "dashboard",
+    "eb0029",
+    "family",
+    "feel",
+    "ff4d000f",
+    "ffff3346",
+    "ffff4d5e",
+    "ffffd9de",
+    "fill-link",
+    "fx_mobile_primary",
+    "high-contrast",
+    "identity",
+    "intact",
+    "inverse",
+    "kept",
+    "mozilla-violet",
+    "night",
+    "nova",
+    "onephus",
+    "oneplus",
+    "oneplus-branded",
+    "palette",
+    "perceived",
+    "performance",
+    "photon",
+    "photonink20",
+    "primary",
+    "primary_container",
+    "primary_inverse",
+    "private-mode",
+    "progress",
+    "r7",
+    "red-accent",
+    "remaps",
+    "text",
+    "untouched",
+    "user",
+    "values",
+    "values-night",
+    "violet",
+    "wants"
+   ],
+   "index_keywords": [
+    "brand",
+    "browser",
+    "colors",
+    "feel",
+    "mozilla-violet",
+    "onephus",
+    "oneplus-branded",
+    "perceived",
+    "performance",
+    "r7",
+    "red-accent",
+    "user",
+    "wants"
+   ]
+  },
+  {
+   "id": "F6",
+   "section": "F",
+   "section_title": "UI / perceived performance",
+   "problem": "user rejected r6 as \"a mix of gray and pureblack\" (screenshot showed #1A1A1A card rows on the pure-black Settings page)",
+   "cause": "r6 container scale lifted off pure black (lowest #0A0A0A < container #1A1A1A < highest #242424) plus layer_color_2/3 and outline tokens still referenced dark greys; every content surface was lit gray on black",
+   "solution": "r7 collapses the ENTIRE dark-theme surface scale to #000000 (background/surface/dim/surface_variant/surface_bright, all surface_container_*, layer_color_2, layer_color_3, splash #210340->#000000) and carries structure with hairlines instead of lit fills: outline #2A2A2A, outline_variant #242424, settings row card gets a 1dp #242424 stroke around its pure-black fill (op7_preference_row_background); result = true pure-black everywhere with cards still distinguishable",
+   "tags": [
+    "amoled",
+    "hairlines",
+    "pureblack",
+    "r7",
+    "resource-only",
+    "theme"
+   ],
+   "keywords": [
+    "amoled",
+    "background",
+    "black",
+    "cards",
+    "carries",
+    "collapses",
+    "container",
+    "content",
+    "dark",
+    "dark-theme",
+    "distinguishable",
+    "entire",
+    "everywhere",
+    "fills",
+    "gets",
+    "gray",
+    "greys",
+    "hairlines",
+    "highest",
+    "instead",
+    "layer_color_2",
+    "layer_color_3",
+    "lifted",
+    "lowest",
+    "op7_preference_row_background",
+    "outline",
+    "outline_variant",
+    "page",
+    "perceived",
+    "performance",
+    "plus",
+    "pure",
+    "pure-black",
+    "pureblack",
+    "r7",
+    "referenced",
+    "rejected",
+    "resource-only",
+    "result",
+    "rows",
+    "scale",
+    "screenshot",
+    "settings",
+    "showed",
+    "splash",
+    "still",
+    "stroke",
+    "structure",
+    "surface",
+    "surface_bright",
+    "surface_container",
+    "surface_variant",
+    "theme",
+    "tokens",
+    "true",
+    "user"
+   ],
+   "index_keywords": [
+    "amoled",
+    "card",
+    "gray",
+    "hairlines",
+    "page",
+    "perceived",
+    "performance",
+    "pure-black",
+    "pureblack",
+    "r7",
+    "rejected",
+    "resource-only",
+    "rows",
+    "screenshot",
+    "settings",
+    "showed",
+    "theme",
+    "user"
+   ]
+  },
+  {
+   "id": "F7",
+   "section": "F",
+   "section_title": "UI / perceived performance",
+   "problem": "playbook sync failed parsing project field-notes logs",
+   "cause": "unquoted YAML scalars containing ': ' broke generate_project_docs.py",
+   "solution": "quote all scalar values in docs/field-notes/log.yml",
+   "tags": [
+    "field-notes",
+    "playbook",
+    "yaml"
+   ],
+   "keywords": [
+    "broke",
+    "containing",
+    "docs",
+    "failed",
+    "field-notes",
+    "generate_project_docs.py",
+    "log.yml",
+    "logs",
+    "parsing",
+    "perceived",
+    "performance",
+    "playbook",
+    "project",
+    "quote",
+    "scalars",
+    "sync",
+    "unquoted",
+    "values",
+    "yaml"
+   ],
+   "index_keywords": [
+    "failed",
+    "field-notes",
+    "logs",
+    "parsing",
+    "perceived",
+    "performance",
+    "playbook",
+    "project",
+    "sync",
+    "yaml"
+   ]
+  },
+  {
    "id": "G1",
    "section": "G",
    "section_title": "Playbook & knowledge",
@@ -3103,8 +3754,8 @@
    "solution": "notes/ layer \u2014 INDEX.md keyword->ids map (grep-able, ~150 lines), one entries/<id>.md per problem, lookup.py ranked search; agents read only the matching entry",
    "tags": [
     "playbook",
-    "tokens",
-    "search"
+    "search",
+    "tokens"
    ],
    "keywords": [
     "agents",
@@ -3158,9 +3809,9 @@
    "cause": "naive tokenization of problem+cause+solution text",
    "solution": "curated INDEX from problem text + explicit tags only; full text kept in index.json for ranked lookup.py matching; stopwords + prefix-collapse",
    "tags": [
+    "index",
     "keywords",
-    "search",
-    "index"
+    "search"
    ],
    "keywords": [
     "auto-extraction",
@@ -3210,8 +3861,8 @@
    "cause": "playbook sync fetched only log.yml",
    "solution": "sync also lists docs/field-notes/sessions and fetches each *.md (skip _template) into _logs/sessions/<slug>/; SESSIONS.md generated with summaries",
    "tags": [
-    "sessions",
     "conversations",
+    "sessions",
     "sync"
    ],
    "keywords": [
@@ -3304,10 +3955,10 @@
    "cause": "playbook-sync.yml scheduled `0 3 * * 1` (Monday only); no repository_dispatch/PAT wiring from the build repo",
    "solution": "playbook-sync now polls every 6h (`0 */6 * * *`) \u2014 self-contained, no cross-repo secrets, also resets GitHub's 60-day scheduled-workflow window; manual dispatch used immediately",
    "tags": [
+    "automation",
     "playbook",
-    "sync",
     "schedule",
-    "automation"
+    "sync"
    ],
    "keywords": [
     "automation",
@@ -3365,10 +4016,10 @@
    "cause": "playbook carried only distilled golden rules (AGENTS.md, skill); the master prompt lived only in the conversation",
    "solution": "added docs/00-master-spec.md to the playbook (canonical contract: engineering spec + Part B user operating rules: no local builds, Shizuku not adb, free infra only, 30-min windows, daily-driver care, playbook auto-update) and wired it into the skill references",
    "tags": [
+    "agents",
     "playbook",
-    "spec",
     "rules",
-    "agents"
+    "spec"
    ],
    "keywords": [
     "agents",
@@ -3447,8 +4098,8 @@
    "tags": [
     "conversations",
     "extraction",
-    "tooling",
-    "low-token"
+    "low-token",
+    "tooling"
    ],
    "keywords": [
     "actual",

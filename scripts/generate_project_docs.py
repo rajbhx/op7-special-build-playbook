@@ -19,6 +19,18 @@ import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+def normalize_log(log):
+    """Accept both canonical {sections:[...]} and flat [entry,...] log shapes.
+
+    Flat lists (older projects) are wrapped into a single section so a
+    malformed log never crashes the whole sync.
+    """
+    if isinstance(log, dict):
+        return log
+    if isinstance(log, list) and all(isinstance(e, dict) for e in log):
+        return {"sections": [{"id": "A", "title": "Field notes", "entries": log}]}
+    return {"sections": []}
+
 def esc(value: str) -> str:
     return value.replace("|", "\\|")
 
@@ -56,7 +68,7 @@ def main() -> None:
         log = None
         if os.path.isfile(log_path):
             with open(log_path) as f:
-                log = yaml.safe_load(f)
+                log = normalize_log(yaml.safe_load(f))
         lines = [
             f"# {proj['name']}",
             "",

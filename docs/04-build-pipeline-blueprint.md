@@ -12,7 +12,10 @@ Proven in the iceraven-op7 repo. Structure:
 
 ## Build job essentials
 
-- **Inputs**: `upstream_commit` (or pinned), `abi=arm64-v8a`, `release=false|true`, `fast=true|false` (skip R8), `release_tag`, `patch_ref`.
+- **Inputs**: `upstream_commit` (or pinned), `abi=arm64-v8a`, `release=false|true`,
+  `auto_release=false|true` (upstream-sync path: publish AFTER gates pass),
+  `fast=true|false` (skip R8), `release_tag` (optional with auto_release; auto
+  tag `op7-<version>-r<rev>` from `version.txt` + `op7-revision.txt`), `patch_ref`.
 - **Concurrency group** keyed on upstream commit so overlapping dispatches cancel.
 - **Clone upstream into `mirror/`**, NOT into a tracked dir of your repo (avoids `destination path already exists` and keeps the tree clean).
 - **Apply patch layer**: `patches/<project>/NNN-*.patch` via `git apply --3way`; any failure = stop, report, never force.
@@ -28,7 +31,13 @@ Proven in the iceraven-op7 repo. Structure:
 
 ## Immutable rules
 
-- Release only from `release=true` + a protected `release` environment + `OP7_RELEASE_*` secrets guarded by presence checks.
+- Release only after ALL quality gates pass: the release job is gated on the build
+  job's `release` output, not the raw dispatch input. It runs in the protected
+  `release` environment with `OP7_RELEASE_*` secrets guarded by presence checks
+  (fail closed). `fast=true` can never auto-release (R8 skipped = not release
+  evidence). Upstream sync dispatches `auto_release=true`, so a new upstream
+  commit -> sync -> gates pass -> GitHub Release happens without human input;
+  any conflict or failed gate stops publishing (unchanged).
 - PRs from untrusted forks never see secrets.
 - Never commit keystores/keys to git.
 - End of build: job summary with source commit, upstream commit, patch status, cache hit/miss, test status, artifact status.

@@ -3,13 +3,13 @@
 project:
   slug: native-ai-op7              # must match this folder name
   name: "Native AI Engine OP7"     # human-readable name
-  description: "Self-learning agentic AI engine (llama.cpp + Vulkan + SQLite FTS5) for OnePlus 7, arm64-v8a only"
+  description: "Self-learning agentic AI engine (llama.cpp + SQLite FTS5, provider-neutral model routing, OxygenOS UI) for OnePlus 7, arm64-v8a only"
   repo: https://github.com/rajbhx/native-ai-op7   # build repo (public)
   upstream_repo: https://github.com/ggml-org/llama.cpp  # embedded native engine (pinned b10428)
   engine: native                   # detected: C/C++ (CMake) + Android Gradle
   target_device: "OnePlus 7 (GM1901)"   # Snapdragon 855, Adreno 640, 6 GB
   abi: arm64-v8a                   # splits.abi arm64 only (spec §26)
-  status: planning                 # draft skeleton; nothing shipped yet
+  status: active                    # CI green through provider layer + OxygenOS UI
   maintainer: rajbhx
 
   # Where this project's field-notes log will live (source for auto-sync).

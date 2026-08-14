@@ -20,15 +20,29 @@
 
 ## Current state
 
-- `status: planning` — phases 0/1/3 done (CI baseline green + badging gate);
-  phase 2 (device baseline) awaits the OP7 on adb.
+- `status: active` — phases 0/1/3 done (CI baseline + badging gate + JVM unit
+  tests); phase 2 (device baseline) awaits the OP7 on adb.
 - Audit-first rule (spec FIRST TASK): compatibility verdict per subsystem before
   Phase 1 code — llama.cpp API (done vs pinned b10428), NDK toolchain, Snapdragon
   855 ARM64 features, Adreno 640 Vulkan, KV-cache quantization, GGUF mmap, CMake,
   JNI, Android 10 foreground-service restrictions, on-device LoRA feasibility.
 - Spec Phase 1 done: NativeEngine RAII split, MemoryMonitor, streaming
   (Flow<String>, sampler chain, stop sequences, cancellation).
-- Spec Phase 2 in progress: MemoryDatabase.kt (SQLite + FTS5).
+- Spec Phase 2 done: MemoryDatabase.kt (SQLite + FTS5) — CI green (f2486d3).
+- Spec Phase 3 done: ReAct ThinkingAgent + tools + ActionParser + ContextManager
+  (a49524c), then SafeExpr fix (40afb2c).
+- Provider abstraction layer (d9ef943 + 546c795): ModelProvider interface,
+  LocalModelProvider + OpenAICompatibleProvider (SSE, zero new deps), ModelRegistry
+  dynamic catalog, ModelRouter (HYBRID/FREE_FIRST/LOCAL_FIRST/OFFLINE_ONLY),
+  health monitor + fallback chain, ContextAdapter, MemoryPrivacyFilter,
+  ModelBenchmark, model_info tool; ThinkingAgent routes via the router.
+- OxygenOS "NEVER SETTLE" UI (33c8f0b): design tokens, Model Hub cards, segmented
+  mode selector, Agent Trace with Horizon Light pulse.
+- Source research audit (9b1e8d8): docs/source-research/ in the build repo
+  (ADR-001..010 + inference/agents/memory/tools/permissions/ui/license docs).
+- Next: verify provider-layer CI green on device-free gates; Phase 4 spec
+  (verified self-learning dataset pipeline), foreground service, on-device
+  benchmarks (playbook Phase 2/7/8) once the OP7 is on adb.
 
 ## Project phases (gold-standard spec)
 

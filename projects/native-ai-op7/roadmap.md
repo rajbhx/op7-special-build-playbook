@@ -40,9 +40,24 @@
   mode selector, Agent Trace with Horizon Light pulse.
 - Source research audit (9b1e8d8): docs/source-research/ in the build repo
   (ADR-001..010 + inference/agents/memory/tools/permissions/ui/license docs).
-- Next: verify provider-layer CI green on device-free gates; Phase 4 spec
-  (verified self-learning dataset pipeline), foreground service, on-device
-  benchmarks (playbook Phase 2/7/8) once the OP7 is on adb.
+- Math/hardware system spec applied (1a10566): Op7SystemProfile (1536 MB
+  budget breakdown, affinity 0xF0, λ=0.05 decay, 85% context watermark),
+  MemoryBudget equations, BM25×exp(-λ·Δt) retrieval, formal agent state
+  machine (IDLE→UNDERSTAND→PLAN→EXECUTE→OBSERVE→VERIFY→FINALIZE→STORE/
+  REPLAN→PLAN) with Stage events in the trace, docs/SYSTEM-PARAMETERS.json.
+- Phase 5 done: ToolPermission (READ_ONLY/SAFE/REQUIRES_APPROVAL/PRIVILEGED)
+  enforced in ToolExecutor + Verifier (tool/memory-claim checks).
+- Phase 6/8 spec: skills (Skill/Registry/Storage/Manager), sessions
+  (start/end/recent), SelfLearningPipeline (verified JSONL export + LoRA
+  eligibility gate that never silently trains).
+- Blueprint Phase 2 done: hardware_detector (topology, highCores 4-7,
+  /proc/self/statm RSS), thread pinning via affinity inheritance, logcat
+  init/pin lines, MemoryWatchdog (1.5 GB ceiling).
+- Blueprint Phase 6 done: Jetpack Compose OxygenOS dashboard (Model Hub,
+  segmented modes, Live Agent Trace, Horizon Light) — CI green (2530e27).
+- Next: verify math-spec CI green; Phase 4 spec foreground service
+  (EngineForegroundService + periodic watchdog), on-device benchmarks
+  (playbook Phase 2/7/8) once the OP7 is on adb.
 
 ## Project phases (gold-standard spec)
 

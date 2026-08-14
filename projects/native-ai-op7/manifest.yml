@@ -9,7 +9,7 @@ project:
   engine: native                   # detected: C/C++ (CMake) + Android Gradle
   target_device: "OnePlus 7 (GM1901)"   # Snapdragon 855, Adreno 640, 6 GB
   abi: arm64-v8a                   # splits.abi arm64 only (spec §26)
-  status: active                    # CI green through provider layer + OxygenOS UI
+  status: active                    # CI green through spec Phase 5 (FGS) + math spec
   maintainer: rajbhx
 
   # Where this project's field-notes log will live (source for auto-sync).
@@ -24,7 +24,7 @@ project:
     "2": pending
     "3": done            # GitHub Actions build + badging/ABI/testOnly gates
     "4": pending
-    "5": pending
+    "5": done             # hardware_detector + watchdog code, CI green; Vulkan unverified until measured
     "6": pending
     "7": pending
     "8": pending

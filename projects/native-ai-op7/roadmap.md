@@ -55,9 +55,19 @@
   init/pin lines, MemoryWatchdog (1.5 GB ceiling).
 - Blueprint Phase 6 done: Jetpack Compose OxygenOS dashboard (Model Hub,
   segmented modes, Live Agent Trace, Horizon Light) — CI green (2530e27).
-- Next: verify math-spec CI green; Phase 4 spec foreground service
-  (EngineForegroundService + periodic watchdog), on-device benchmarks
-  (playbook Phase 2/7/8) once the OP7 is on adb.
+- Math/hardware spec CI green (1a10566 at 31807594038; head efd0a3e green at
+  31808703429, docs-only after 31808113436).
+- Spec Phase 5 done: EngineForegroundService (d4570d7, green 31808113436) —
+  specialUse FGS holds engine+memory, 10s RSS watchdog vs 1.5 GB ceiling,
+  learning eligibility ~5 min, Start/Stop toggle + POST_NOTIFICATIONS request.
+- Self-learning (spec Phase 4) done: SelfLearningPipeline verified JSONL export
+  + LoRA eligibility gate (never silently trains; dataset preserved for
+  external training).
+- Notes logged through A17 (FGS manifest requirements at targetSdk 34).
+- Next: on-device benchmarks (playbook Phase 2/7/8 — threads 2-6, GPU layers,
+  tokens/sec, first-token latency, RSS vs 1.5 GB, sustained perf primary) once
+  the OP7 is on adb; upstream llama.cpp auto-sync (playbook Phase 4);
+  experimental LoRA (spec Phase 6) stays eligibility-gated.
 
 ## Project phases (gold-standard spec)
 

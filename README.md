@@ -25,6 +25,11 @@ that stuck. Built to be reused for other apps and other special builds.
 
 ## Docs
 
+> Two docs intentionally share the `00` prefix: `00-master-spec.md` is the
+> canonical engineering contract (spec + operating rules, kept verbatim), while
+> `00-quickstart.md` is the enforced order of operations. Both are hand-edited
+> entry points, so neither is renumbered.
+
 | Doc | What it covers |
 |---|---|
 | `00-master-spec.md` | the full engineering contract (ROLE, 35 requirements, success criteria, user operating rules) |

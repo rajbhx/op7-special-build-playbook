@@ -15,3 +15,4 @@ in the build repo. Synced copies for offline search.
 | 2026-08-14-phase4-service.md | Session digest — 2026-08-14 — Phase 4 foreground service + UI/README |
 | 2026-08-14-ui-redesign-downloader.md | Session digest — 2026-08-14 — Industrial UI redesign + in-app GGUF downloader |
 | 2026-08-15-litert-reference.md | Session digest — 2026-08-15 — LiteRT/LiteRT-LM research (parked as reference) |
+| 2026-08-15-ux-exec-verify.md | Session digest — 2026-08-15 — UX/execution-layer verification |

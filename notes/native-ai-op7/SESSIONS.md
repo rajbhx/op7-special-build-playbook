@@ -20,4 +20,6 @@ in the build repo. Synced copies for offline search.
 | 2026-08-15-observability-layer.md | Session digest — 2026-08-15 — Observability layer (metrics/diagnostics/jank) |
 | 2026-08-15-track-a-e-termux-memory.md | Session digest — 2026-08-15 — Track A UX fixes + Track E Termux core + dynamic memory |
 | 2026-08-15-track-b-source-kb.md | Session digest — 2026-08-15 — Track B: uBO-style source knowledge base |
+| 2026-08-15-track-c-sources-mnn-usearch.md | Session digest — 2026-08-15 — Track C: source KB completion + MNN + USearch |
+| 2026-08-15-ux-exec-verify-crash.md | Session digest — 2026-08-15 — On-device exec verify + crash fix |
 | 2026-08-15-ux-exec-verify.md | Session digest — 2026-08-15 — UX/execution-layer verification |

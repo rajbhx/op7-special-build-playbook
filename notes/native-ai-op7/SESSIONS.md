@@ -31,4 +31,5 @@ in the build repo. Synced copies for offline search.
 | 2026-08-16-golden-ux-viewmodel-approval-a11y.md | Session digest — 2026-08-16 — Golden-standard UX: ViewModel state survival, tool approval gate, feedback, a11y |
 | 2026-08-16-golden-wiring-all-gaps.md | Session digest — 2026-08-16 — Golden-standard wiring: all identified gaps |
 | 2026-08-16-memory-ceiling-gguf-meta-ux.md | Session digest — 2026-08-16 — Memory ceiling + GGUF metadata + UX color roles |
+| 2026-08-16-ondevice-install-smoke-test.md | Session digest — 2026-08-16 — On-device install + golden-wave smoke test (GM1901) |
 | 2026-08-16-skills-dataset-catalog-wave.md | Session digest — 2026-08-16 — Phase 10 skills UI + Phase 4 dataset export + catalog wave |

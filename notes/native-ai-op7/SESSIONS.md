@@ -24,3 +24,10 @@ in the build repo. Synced copies for offline search.
 | 2026-08-15-ux-exec-verify-crash.md | Session digest — 2026-08-15 — On-device exec verify + crash fix |
 | 2026-08-15-ux-exec-verify.md | Session digest — 2026-08-15 — UX/execution-layer verification |
 | 2026-08-16-ci-rollback-protection-fmhy.md | Session digest — 2026-08-16 — CI rollback, branch protection, FMHY-only sources |
+| 2026-08-16-core-errorlog-stats-crash.md | Session digest — 2026-08-16 — Full on-device test + core ErrorLog/ERRORS tab |
+| 2026-08-16-deliberately-not-done-increment.md | Session digest — 2026-08-16 — "Deliberately not done" increment (resume, fallback, survival, ingest) |
+| 2026-08-16-golden-ux-crosscheck-fixes.md | Session digest — 2026-08-16 — Golden-UX cross-check: threading, state races, semantics |
+| 2026-08-16-golden-ux-viewmodel-approval-a11y.md | Session digest — 2026-08-16 — Golden-standard UX: ViewModel state survival, tool approval gate, feedback, a11y |
+| 2026-08-16-golden-wiring-all-gaps.md | Session digest — 2026-08-16 — Golden-standard wiring: all identified gaps |
+| 2026-08-16-memory-ceiling-gguf-meta-ux.md | Session digest — 2026-08-16 — Memory ceiling + GGUF metadata + UX color roles |
+| 2026-08-16-skills-dataset-catalog-wave.md | Session digest — 2026-08-16 — Phase 10 skills UI + Phase 4 dataset export + catalog wave |

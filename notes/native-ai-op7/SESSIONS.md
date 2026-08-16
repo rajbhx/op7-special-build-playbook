@@ -23,3 +23,4 @@ in the build repo. Synced copies for offline search.
 | 2026-08-15-track-c-sources-mnn-usearch.md | Session digest — 2026-08-15 — Track C: source KB completion + MNN + USearch |
 | 2026-08-15-ux-exec-verify-crash.md | Session digest — 2026-08-15 — On-device exec verify + crash fix |
 | 2026-08-15-ux-exec-verify.md | Session digest — 2026-08-15 — UX/execution-layer verification |
+| 2026-08-16-ci-rollback-protection-fmhy.md | Session digest — 2026-08-16 — CI rollback, branch protection, FMHY-only sources |
